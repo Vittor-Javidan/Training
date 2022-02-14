@@ -1,0 +1,11 @@
+{
+  "name": "notebook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "loop.js",
+  "scripts": {
+    "start": "set UV_THREADPOOL_SIZE=1 & node multitask"
+  },
+  "author": "",
+  "license": "ISC"
+}
