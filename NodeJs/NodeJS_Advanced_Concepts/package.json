@@ -4,7 +4,7 @@
   "description": "",
   "main": "loop.js",
   "scripts": {
-    "start": "set UV_THREADPOOL_SIZE=1 & node multitask"
+    "start": "set UV_THREADPOOL_SIZE=4 & node index.js"
   },
   "author": "",
   "license": "ISC",
