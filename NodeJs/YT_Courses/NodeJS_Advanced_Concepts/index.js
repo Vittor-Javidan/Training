@@ -8,7 +8,7 @@ if (cluster.isMaster){
         
 } else {
 
-        //Im a chiel, Im going to act like a server and do nothing else
+        //Im a child, Im going to act like a server and do nothing else
         const express = require('express')
         const app = express()
 
@@ -20,6 +20,10 @@ if (cluster.isMaster){
         app.route('/').get((req, res) => {
                 doWork(5000)
                 res.send('Hi there')
+        })
+
+        app.route('/fast').get((req, res) => {
+                res.send('This was fast!')
         })
 
         app.listen(3000)
