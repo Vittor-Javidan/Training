@@ -1,31 +1,16 @@
-const cluster = require('cluster')
+//Im a child, Im going to act like a server and do nothing else
+const express = require('express')
+const crypto = require('crypto')
+const app = express()
 
-//Is the file being executed in master mode?
-if (cluster.isMaster){
+app.route('/').get((req, res) => {
+        crypto.pbkdf2('a','b', 100000, 512, 'sha512', () => {
+                res.send('Hi there')
+        })      
+})
 
-        //Cause index.js to be executed again but in child mode
-        for (let index = 0; index < 12; index++) {
-                cluster.fork()
-        }
+app.route('/fast').get((req, res) => {
+        res.send('This was fast!')
+})
 
-} else {
-
-        //Im a child, Im going to act like a server and do nothing else
-        const express = require('express')
-        const crypto = require('crypto')
-        const app = express()
-
-
-
-        app.route('/').get((req, res) => {
-                crypto.pbkdf2('a','b', 100000, 512, 'sha512', () => {
-                        res.send('Hi there')
-                })      
-        })
-
-        app.route('/fast').get((req, res) => {
-                res.send('This was fast!')
-        })
-
-        app.listen(3000)
-}
+app.listen(3000)
