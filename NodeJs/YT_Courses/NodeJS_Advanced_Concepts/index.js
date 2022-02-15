@@ -4,27 +4,28 @@ const app = express()
 const Worker = require('webworker-threads').Worker
 
 app.route('/').get((req, res) => {
-  const worker = new Worker(function () {
-    this.onmessage = function () {
+    const worker = new Worker(function () {
+        this.onmessage = function () {
 
-      let counter = 0
-      while (counter < 1e9) {
-        counter++
-      }
+            let counter = 0
+            while (counter < 1e9) {
+                counter++
+            }
 
-      postMessage(counter)
+            postMessage(counter)
+        }
+    })
+
+    worker.onmessage = function (message) {
+        console.log(message.data)
+        res. send(`${message.data}`)
     }
-  })
 
-  worker.onmessage = function (myCounter) {
-    console.log(myCounter)
-  }
-
-  worker.postMessage()
+    worker.postMessage()
 })
 
 app.route('/fast').get((req, res) => {
-  res.send('This was fast!')
+    res.send('This was fast!')
 })
 
 app.listen(3000)
