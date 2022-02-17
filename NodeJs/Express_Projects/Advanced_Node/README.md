@@ -3,8 +3,8 @@ This is a Project from Node JS Advanced Concepts
 The objective of this project is to add some features in a given pre-builded server.
 These features are:
 
-   > Redis-Backed Caching
-   > Browser Based Integration Testing
+   > Redis-Backed Caching                    (Done)
+   > Browser Based Integration Testing       (Done)
    > Continuous Integration Setup
    > Scalable File/Image Upload
 
@@ -16,7 +16,7 @@ Playlist Link: https://www.youtube.com/watch?v=ZjmrL7kkFh0&list=PLKu4a5OPnvu6-u8
 
 IMPORTANT!!!
 
-   This project came from a old repository, and with him came some issues of outdated dependencies.
+   This project came from a old repository (from year 2018), and with him came some issues of outdated dependencies.
    NPM audit is not enough to fix it.
 
    I tried to look for pull requests to solve this, but i couldn't manage to do it. Even with ppl commit sugetions to fix it, some issues just keeping happening
