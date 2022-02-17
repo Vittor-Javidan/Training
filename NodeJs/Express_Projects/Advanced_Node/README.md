@@ -5,8 +5,8 @@ These features are:
 
    > Redis-Backed Caching                    (Done)
    > Browser Based Integration Testing       (Done)
-   > Continuous Integration Setup
-   > Scalable File/Image Upload
+   > Continuous Integration Setup            (Done)
+   > Scalable File/Image Upload              (Done)
 
 Original repository: https://github.com/StephenGrider/AdvancedNodeStarter
 
