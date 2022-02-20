@@ -1,51 +1,13 @@
 import ReactDOM from 'react-dom'
-
-function App() {
-
-   const [things, setThings] = React.useState(["Thing 1", "Thing 2"])
-
-   function addItem() {
-      const newThingText = `Thing ${things.length + 1}`
-      setThings(prevState => [...prevState, newThingText])
-   }
-
-   const thingsElements = things.map(thing => <p key={thing}>{thing}</p>)
-
-   return (
-      <div>
-         <button onClick={addItem} >Add Item</button>
-         {thingsElements}
-      </div>
-   )
-}
-
-function Count() {
-
-   const [count, setCount] = React.useState(0)
-
-   function add() {
-      setCount(count + 1)
-   }
-
-   function subtract() {
-      setCount(count - 1)
-   }
-
-   return (
-      <div>
-         <div>
-            <button onClick={add}>+</button>
-            <button onClick={subtract}>-</button>
-            <p>{count}</p>
-         </div>
-      </div>
-   )
-}
+import Example_1 from './components/Example_1'
+import Example_2 from './components/Example_2'
+import Example_3 from './components/Example_3'
 
 ReactDOM.render(
    <div>
-      <App />
-      <Count />
+      <Example_1 />
+      <Example_2 />
+      <Example_3 />
    </div>,
    document.getElementById('root')
 )
