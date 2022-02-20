@@ -15,7 +15,7 @@ export default function Card() {
             <div className="card--badge">{badgeText}</div>
             <img src={card.coverImg} className="card--image" alt="" />
             <div className="card--stats">
-               <img className="card--star-icon" src="images/star.png" alt="" />
+               <img className="card--star-icon" src="./images/components/CardList/star.png" alt="" />
                <span>{card.stats.rating}</span>
                <span className="gray">({card.stats.reviewCount}) • </span>
                <span className="gray">{card.location}</span>
