@@ -5,12 +5,22 @@ export default function Meme() {
    const [allMemes, setAllMemes] = React.useState([])
    const [font, setFont] = React.useState({ fontSize: 40 })
    const [meme, setMeme] = React.useState({
+      updateState: true,
       randomImage: "http://i.imgflip.com/1bij.jpg",
       textCount: 1,
-      memeText: {
-         text1: ""
-      }
+      memeText: []
    })
+   const [inputElements, setInputElement] = React.useState([
+      <input
+         key={`key${meme.textCount}`}
+         id={meme.textCount}
+         type="text"
+         placeholder="Top text"
+         className="form--input"
+         value={meme.memeText[0]}
+         onChange={handleChange}
+      />
+   ])
 
    function getMemeImage() {
       const randomNumber = Math.floor(Math.random() * allMemes.length)
@@ -23,29 +33,35 @@ export default function Meme() {
 
    function handleChange(event) {
 
-      const { name, value } = event.target
+      const { id, value } = event.target
+      meme.memeText[id -1 ] = value
 
       setMeme(prev => prev = {
          ...prev,
-         memeText:{
-            ...prev.memeText,
-            [name]: value
-         }
+         updateState: !prev.updateState
       })
    }
 
-   function newTextImput(){
-
-      const name = `text${meme.textCount + 1}`
+   function newTextImput() {
 
       setMeme(prev => prev = {
          ...prev,
          textCount: prev.textCount + 1,
-         memeText:{
-            ...prev.memeText,
-            [name]: ""
-         }
       })
+
+
+      setInputElement(prev => [
+         ...prev,
+         <input
+            key={`key${meme.textCount + 1}`}
+            id={meme.textCount + 1}
+            type="text"
+            placeholder="Top text"
+            className="form--input"
+            value={meme.memeText[meme.textCount]}
+            onChange={handleChange}
+         />
+      ])
    }
 
    React.useEffect(() => {
@@ -57,20 +73,15 @@ export default function Meme() {
    }, [])
 
    React.useEffect(() => {
-      console.log(meme)
+      console.log(meme.memeText)
+      console.log(meme.textCount)
+      console.log(meme.randomImage)
+      console.log(meme.updateState)
    }, [meme])
-
    return (
       <main>
          <div className="form">
-            <input
-               type="text"
-               placeholder="Top text"
-               className="form--input"
-               name="text1"
-               value={meme.memeText.text1}
-               onChange={handleChange}
-            />
+            {inputElements}
             <button
                className="form--button"
                onClick={newTextImput}
@@ -86,9 +97,9 @@ export default function Meme() {
          </div>
          <div className="meme">
             <img src={meme.randomImage} className="meme--image" alt="" />
-            <p style={font} className="meme--text top">
-               {meme.memeText.text1}
-            </p>
+            <div style={font} className="meme--text top">
+               {meme.memeText[0]}
+            </div>
          </div>
          <input
             type="text"

@@ -61,6 +61,7 @@ main {
 
 .meme {
    position: relative;
+   height: min-content;
    margin: auto;
    background-size: 100%;
    text-align: center;
@@ -70,10 +71,6 @@ main {
 
 .meme--text {
    position: absolute;
-   left: 0;
-   right: 0;
-   margin: 15px 0;
-   padding: 0 5px;
    font-family: impact;
    text-transform: uppercase;
    color: white;
@@ -90,11 +87,8 @@ main {
 }
 
 .top {
+   left: 0px;
    top: 0px;
-}
-
-.bottom {
-   bottom: 0px;
 }
 
 .meme--image {
