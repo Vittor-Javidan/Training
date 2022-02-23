@@ -5,9 +5,11 @@ export default function Meme() {
    const [allMemes, setAllMemes] = React.useState([])
    const [font, setFont] = React.useState({ fontSize: 40 })
    const [meme, setMeme] = React.useState({
-      topText: "",
-      bottomText: "",
       randomImage: "http://i.imgflip.com/1bij.jpg",
+      textCount: 1,
+      memeText: {
+         text1: ""
+      }
    })
 
    function getMemeImage() {
@@ -25,7 +27,24 @@ export default function Meme() {
 
       setMeme(prev => prev = {
          ...prev,
-         [name]: value
+         memeText:{
+            ...prev.memeText,
+            [name]: value
+         }
+      })
+   }
+
+   function newTextImput(){
+
+      const name = `text${meme.textCount + 1}`
+
+      setMeme(prev => prev = {
+         ...prev,
+         textCount: prev.textCount + 1,
+         memeText:{
+            ...prev.memeText,
+            [name]: ""
+         }
       })
    }
 
@@ -37,7 +56,9 @@ export default function Meme() {
 
    }, [])
 
-   console.log("Meme Component rendered")
+   React.useEffect(() => {
+      console.log(meme)
+   }, [meme])
 
    return (
       <main>
@@ -46,18 +67,16 @@ export default function Meme() {
                type="text"
                placeholder="Top text"
                className="form--input"
-               name="topText"
-               value={meme.topText}
+               name="text1"
+               value={meme.memeText.text1}
                onChange={handleChange}
             />
-            <input
-               type="text"
-               placeholder="Bottom text"
-               className="form--input"
-               name="bottomText"
-               value={meme.bottomText}
-               onChange={handleChange}
-            />
+            <button
+               className="form--button"
+               onClick={newTextImput}
+            >
+               New Text
+            </button>
             <button
                className="form--button"
                onClick={getMemeImage}
@@ -68,10 +87,7 @@ export default function Meme() {
          <div className="meme">
             <img src={meme.randomImage} className="meme--image" alt="" />
             <p style={font} className="meme--text top">
-               {meme.topText}
-            </p>
-            <p style={font} className="meme--text bottom">
-               {meme.bottomText}
+               {meme.memeText.text1}
             </p>
          </div>
          <input
