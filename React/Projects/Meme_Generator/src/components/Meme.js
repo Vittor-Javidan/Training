@@ -13,8 +13,8 @@ export default function Meme() {
    function getMemeImage() {
       const randomNumber = Math.floor(Math.random() * allMemes.length)
       const url = allMemes[randomNumber].url
-      setMeme(prevState => ({
-         ...prevState,
+      setMeme(prev => ({
+         ...prev,
          randomImage: url
       }))
    }
@@ -23,8 +23,8 @@ export default function Meme() {
 
       const { name, value } = event.target
 
-      setMeme(prevState => prevState = {
-         ...meme,
+      setMeme(prev => prev = {
+         ...prev,
          [name]: value
       })
    }
@@ -34,16 +34,6 @@ export default function Meme() {
       fetch("https://api.imgflip.com/get_memes")
          .then(res => res.json())
          .then(data => setAllMemes(data.data.memes))
-
-      /* Optional way to write the block code above
-
-         async function getMemes() {
-            const res = await fetch("https://api.imgflip.com/get_memes")
-            const data = await res.json()
-            setAllMemes(data.data.memes)
-         }
-         getMeme()
-      */
 
    }, [])
 
