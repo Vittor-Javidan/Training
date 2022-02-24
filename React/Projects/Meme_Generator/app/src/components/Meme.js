@@ -7,34 +7,41 @@ export default function Meme() {
       updateState: true,
       randomImage: "http://i.imgflip.com/1bij.jpg",
       textCount: 0,
-      memeText: []
+      memeText: [],
+      textFont: `${40}px`
    })
-
    const [inputElements, setInputElement] = React.useState([])
    const [textElements, setTextElements] = React.useState([])
 
-   function handleChange(event) {
+   function newText(){
 
-      const { id, value, name } = event.target
-      meme.memeText[id - 1] = value
-      document.getElementById(`textElement${id}`).innerText = value
+      function handleTextChange(event){
 
-      setMeme(prev => prev = {
-         ...prev,
-         updateState: !prev.updateState
-      })
-   }
-   function getMemeImage() {
+         const { id, value } = event.target
+         let textArray = meme.memeText
+         textArray[id - 1] = value
+         setMeme(prev => prev = {
+            ...prev,
+            memeText: textArray
+         })
 
-      const randomNumber = Math.floor(Math.random() * allMemes.length)
-      const url = allMemes[randomNumber].url
+         setTextElements(prev => {
 
-      setMeme(prev => ({
-         ...prev,
-         randomImage: url
-      }))
-   }
-   function newTextImput() {
+            let elementsArray = [...prev]
+            elementsArray[id - 1] = (
+               <div
+                  className="meme--text top"
+                  key={`teKey${id}`}
+                  id={`textElement${id}`}
+                  style={{fontSize: meme.textFont}}
+               >
+                  {value}
+               </div>
+            )
+
+            return prev = elementsArray
+         })
+      }
 
       setMeme(prev => prev = {
          ...prev,
@@ -50,7 +57,7 @@ export default function Meme() {
             id={meme.textCount + 1}
             placeholder={`Text ${meme.textCount + 1}`}
             value={meme.memeText[meme.textCount]}
-            onChange={handleChange}
+            onChange={handleTextChange}
          />
       ])
 
@@ -59,11 +66,48 @@ export default function Meme() {
          <div
             className="meme--text top"
             key={`teKey${meme.textCount + 1}`}
-            id={`textElement${meme.textCount + 1}`}        
+            id={`textElement${meme.textCount + 1}`}
+            style={{fontSize: meme.textFont}}
          >
             {meme.memeText[meme.textCount]}
          </div>
       ])
+   }
+   function newFontSize(event){
+      const { value } = event.target
+
+      setTextElements(prev => {
+
+         setMeme(prev => ({
+            ...prev,
+            textFont: [`${value}px`]
+         }))
+
+         let elementsArray = [...prev]
+         for(let i = 0; i < elementsArray.length; i++){
+            elementsArray[i] = (
+               <div
+                  className="meme--text top"
+                  key={`teKey${i + 1}`}
+                  id={`textElement${i + 1}`}
+                  style={{fontSize: [`${value}px`]}}
+               >
+                  {meme.memeText[i]}
+               </div>
+            )
+         }
+
+         return prev = elementsArray
+      })
+   }
+   function getNewImage(){
+      const randomNumber = Math.floor(Math.random() * allMemes.length)
+      const url = allMemes[randomNumber].url
+
+      setMeme(prev => ({
+         ...prev,
+         randomImage: url
+      }))
    }
 
    React.useEffect(() => {
@@ -73,11 +117,6 @@ export default function Meme() {
          .then(data => setAllMemes(data.data.memes))
 
    }, [])
-   React.useEffect(() => {
-      console.log(meme.memeText)
-      console.log(meme.textCount)
-      console.log(meme.randomImage)
-   }, [meme])
 
    return (
       <main>
@@ -86,13 +125,13 @@ export default function Meme() {
             {inputElements}
             <button
                className="form--button"
-               onClick={newTextImput}
+               onClick={newText}
             >
                New Text
             </button>
             <button
                className="form--button"
-               onClick={getMemeImage}
+               onClick={getNewImage}
             >
                Get a new meme image 🖼️
             </button>
@@ -103,6 +142,19 @@ export default function Meme() {
             {textElements}
          </div>
 
+         <input
+            type="text"
+            placeholder={`Font size: ${meme.textFont}`}
+            onChange={newFontSize}
+         />
+
       </main>
    )
 }
+
+/*
+   React.useEffect(() => {
+      console.log(meme.memeText)
+      console.log(`${meme.textCount} ${meme.randomImage} ${meme.textFont}`)
+   }, [meme])
+*/
