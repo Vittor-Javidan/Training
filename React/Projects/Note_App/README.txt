@@ -7,4 +7,7 @@ In order to see the project, you need to create a react app, delete the folders 
 
 features to implement:
 
-   
+   - Sync notes with localStorage (done)
+   - Add note summary title
+   - Move modified notes to the top of the list
+   - Delete notes
