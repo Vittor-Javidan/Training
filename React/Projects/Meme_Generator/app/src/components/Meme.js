@@ -17,9 +17,14 @@ export default function Meme() {
          type="text"
          placeholder="Top text"
          className="form--input"
-         value={meme.memeText[0]}
+         value={meme.memeText[meme.textCount - 1]}
          onChange={handleChange}
       />
+   ])
+   const [textElements, setTextElements] = React.useState([
+      <div key={`teKey${meme.textCount}`} style={font} className="meme--text top" id={`textElement${meme.textCount}`}>
+         {meme.memeText[meme.textCount - 1]}
+      </div>
    ])
 
    function getMemeImage() {
@@ -34,7 +39,8 @@ export default function Meme() {
    function handleChange(event) {
 
       const { id, value } = event.target
-      meme.memeText[id -1 ] = value
+      meme.memeText[id - 1] = value
+      document.getElementById(`textElement${id}`).innerText = value
 
       setMeme(prev => prev = {
          ...prev,
@@ -49,7 +55,6 @@ export default function Meme() {
          textCount: prev.textCount + 1,
       })
 
-
       setInputElement(prev => [
          ...prev,
          <input
@@ -61,6 +66,17 @@ export default function Meme() {
             value={meme.memeText[meme.textCount]}
             onChange={handleChange}
          />
+      ])
+
+      setTextElements(prev => [
+         ...prev,
+         <div
+            key={`teKey${meme.textCount + 1}`}
+            style={font} className="meme--text top"
+            id={`textElement${meme.textCount + 1}`}
+         >
+            {meme.memeText[meme.textCount]}
+         </div>
       ])
    }
 
@@ -76,8 +92,8 @@ export default function Meme() {
       console.log(meme.memeText)
       console.log(meme.textCount)
       console.log(meme.randomImage)
-      console.log(meme.updateState)
    }, [meme])
+
    return (
       <main>
          <div className="form">
@@ -97,9 +113,7 @@ export default function Meme() {
          </div>
          <div className="meme">
             <img src={meme.randomImage} className="meme--image" alt="" />
-            <div style={font} className="meme--text top">
-               {meme.memeText[0]}
-            </div>
+            {textElements}
          </div>
          <input
             type="text"
