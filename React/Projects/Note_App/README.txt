@@ -5,9 +5,9 @@ Youtube Link: https://www.youtube.com/watch?v=bMknfKXIFA8&t=36050s
 
 In order to see the project, you need to create a react app, delete the folders "src" and "public" from the app, to copy and paste this project folders in it. And this time is important to install the dependencies from package.json
 
-features to implement:
+features that i had to implement in this project:
 
    - Sync notes with localStorage (done)
    - Add note summary title (done)
-   - Move modified notes to the top of the list
+   - Move modified notes to the top of the list (done)
    - Delete notes

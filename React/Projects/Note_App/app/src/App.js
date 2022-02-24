@@ -14,7 +14,7 @@ export default function App() {
 
     React.useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(notes))
-        console.log(notes[0].body.split("\n"))
+        console.log(notes)
     }, [notes])
 
     function createNewNote() {
@@ -27,11 +27,28 @@ export default function App() {
     }
 
     function updateNote(text) {
+
+        //Makes Update notes goes to the top o the notes list
+        setNotes(oldNotes =>  {
+            const newArray = []
+            for(let i = 0; i < oldNotes.length; i++){
+                const oldNote = oldNotes[i]
+                if (oldNote.id === currentNoteId){
+                    newArray.unshift(oldNote)
+                } else {
+                    newArray.push(oldNote)
+                }
+            }
+            return newArray
+        })
+
+        //Makes notes be updated
         setNotes(oldNotes => oldNotes.map(oldNote => {
             return oldNote.id === currentNoteId
                 ? { ...oldNote, body: text }
                 : oldNote
         }))
+        
     }
 
     function findCurrentNote() {
