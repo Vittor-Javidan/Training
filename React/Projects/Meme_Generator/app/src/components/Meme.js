@@ -11,34 +11,31 @@ export default function Meme() {
       memeText: []
    })
    const [inputElements, setInputElement] = React.useState([
+
       <input
+         className="form--input"
+         type="text"
          key={`key${meme.textCount}`}
          id={meme.textCount}
-         type="text"
-         placeholder="Top text"
-         className="form--input"
+         placeholder={`Text ${meme.textCount}`}
          value={meme.memeText[meme.textCount - 1]}
          onChange={handleChange}
       />
    ])
    const [textElements, setTextElements] = React.useState([
-      <div key={`teKey${meme.textCount}`} style={font} className="meme--text top" id={`textElement${meme.textCount}`}>
-         {meme.memeText[meme.textCount - 1]}
+
+      <div 
+         className="meme--text top"
+         key={`teKey${meme.textCount}`}
+         id={`textElement${meme.textCount}`} 
+         style={font}         
+      >
       </div>
    ])
 
-   function getMemeImage() {
-      const randomNumber = Math.floor(Math.random() * allMemes.length)
-      const url = allMemes[randomNumber].url
-      setMeme(prev => ({
-         ...prev,
-         randomImage: url
-      }))
-   }
-
    function handleChange(event) {
 
-      const { id, value } = event.target
+      const { id, value, name } = event.target
       meme.memeText[id - 1] = value
       document.getElementById(`textElement${id}`).innerText = value
 
@@ -47,7 +44,16 @@ export default function Meme() {
          updateState: !prev.updateState
       })
    }
+   function getMemeImage() {
 
+      const randomNumber = Math.floor(Math.random() * allMemes.length)
+      const url = allMemes[randomNumber].url
+
+      setMeme(prev => ({
+         ...prev,
+         randomImage: url
+      }))
+   }
    function newTextImput() {
 
       setMeme(prev => prev = {
@@ -58,11 +64,11 @@ export default function Meme() {
       setInputElement(prev => [
          ...prev,
          <input
+            className="form--input"
+            type="text"
             key={`key${meme.textCount + 1}`}
             id={meme.textCount + 1}
-            type="text"
-            placeholder="Top text"
-            className="form--input"
+            placeholder={`Text ${meme.textCount + 1}`}
             value={meme.memeText[meme.textCount]}
             onChange={handleChange}
          />
@@ -71,9 +77,10 @@ export default function Meme() {
       setTextElements(prev => [
          ...prev,
          <div
+            className="meme--text top"
             key={`teKey${meme.textCount + 1}`}
-            style={font} className="meme--text top"
             id={`textElement${meme.textCount + 1}`}
+            style={font}            
          >
             {meme.memeText[meme.textCount]}
          </div>
@@ -87,7 +94,6 @@ export default function Meme() {
          .then(data => setAllMemes(data.data.memes))
 
    }, [])
-
    React.useEffect(() => {
       console.log(meme.memeText)
       console.log(meme.textCount)
@@ -96,6 +102,7 @@ export default function Meme() {
 
    return (
       <main>
+
          <div className="form">
             {inputElements}
             <button
@@ -111,10 +118,12 @@ export default function Meme() {
                Get a new meme image 🖼️
             </button>
          </div>
+
          <div className="meme">
             <img src={meme.randomImage} className="meme--image" alt="" />
             {textElements}
          </div>
+         
          <input
             type="text"
             name="fontSize"
@@ -122,6 +131,7 @@ export default function Meme() {
             onChange={(event) => setFont(prevState => prevState = { fontSize: Number(event.target.value) })}
          >
          </input>
+
       </main>
    )
 }
