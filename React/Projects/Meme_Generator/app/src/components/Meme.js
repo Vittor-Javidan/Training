@@ -3,35 +3,15 @@ import React from "react"
 export default function Meme() {
 
    const [allMemes, setAllMemes] = React.useState([])
-   const [font, setFont] = React.useState({ fontSize: 40 })
    const [meme, setMeme] = React.useState({
       updateState: true,
       randomImage: "http://i.imgflip.com/1bij.jpg",
-      textCount: 1,
+      textCount: 0,
       memeText: []
    })
-   const [inputElements, setInputElement] = React.useState([
 
-      <input
-         className="form--input"
-         type="text"
-         key={`key${meme.textCount}`}
-         id={meme.textCount}
-         placeholder={`Text ${meme.textCount}`}
-         value={meme.memeText[meme.textCount - 1]}
-         onChange={handleChange}
-      />
-   ])
-   const [textElements, setTextElements] = React.useState([
-
-      <div 
-         className="meme--text top"
-         key={`teKey${meme.textCount}`}
-         id={`textElement${meme.textCount}`} 
-         style={font}         
-      >
-      </div>
-   ])
+   const [inputElements, setInputElement] = React.useState([])
+   const [textElements, setTextElements] = React.useState([])
 
    function handleChange(event) {
 
@@ -79,8 +59,7 @@ export default function Meme() {
          <div
             className="meme--text top"
             key={`teKey${meme.textCount + 1}`}
-            id={`textElement${meme.textCount + 1}`}
-            style={font}            
+            id={`textElement${meme.textCount + 1}`}        
          >
             {meme.memeText[meme.textCount]}
          </div>
@@ -123,14 +102,6 @@ export default function Meme() {
             <img src={meme.randomImage} className="meme--image" alt="" />
             {textElements}
          </div>
-         
-         <input
-            type="text"
-            name="fontSize"
-            placeholder={`Font size: ${font.fontSize}`}
-            onChange={(event) => setFont(prevState => prevState = { fontSize: Number(event.target.value) })}
-         >
-         </input>
 
       </main>
    )
