@@ -1,4 +1,6 @@
 import React from "react"
+import Draggable from "react-draggable"
+
 
 export default function Meme() {
 
@@ -10,12 +12,13 @@ export default function Meme() {
       memeText: [],
       textFont: `${40}px`
    })
+
    const [inputElements, setInputElement] = React.useState([])
    const [textElements, setTextElements] = React.useState([])
 
-   function newText(){
+   function newText() {
 
-      function handleTextChange(event){
+      function handleTextChange(event) {
 
          const { id, value } = event.target
          let textArray = meme.memeText
@@ -29,14 +32,15 @@ export default function Meme() {
 
             let elementsArray = [...prev]
             elementsArray[id - 1] = (
-               <div
-                  className="meme--text top"
-                  key={`teKey${id}`}
-                  id={`textElement${id}`}
-                  style={{fontSize: meme.textFont}}
-               >
-                  {value}
-               </div>
+               <Draggable key={`teKey${id}`}>
+                  <div
+                     className="meme--text top"
+                     id={`textElement${id}`}
+                     style={{ fontSize: meme.textFont }}
+                  >
+                     {value}
+                  </div>
+               </Draggable>
             )
 
             return prev = elementsArray
@@ -63,44 +67,28 @@ export default function Meme() {
 
       setTextElements(prev => [
          ...prev,
-         <div
-            className="meme--text top"
-            key={`teKey${meme.textCount + 1}`}
-            id={`textElement${meme.textCount + 1}`}
-            style={{fontSize: meme.textFont}}
-         >
-            {meme.memeText[meme.textCount]}
-         </div>
+         <Draggable key={`teKey${meme.textCount + 1}`}>
+            <div
+               className="meme--text top"
+               id={`textElement${meme.textCount + 1}`}
+               style={{ fontSize: meme.textFont }}
+            >
+               {meme.memeText[meme.textCount]}
+            </div>
+         </Draggable>
       ])
    }
-   function newFontSize(event){
+
+   function newFontSize(event) {
       const { value } = event.target
 
-      setTextElements(prev => {
-
-         setMeme(prev => ({
-            ...prev,
-            textFont: [`${value}px`]
-         }))
-
-         let elementsArray = [...prev]
-         for(let i = 0; i < elementsArray.length; i++){
-            elementsArray[i] = (
-               <div
-                  className="meme--text top"
-                  key={`teKey${i + 1}`}
-                  id={`textElement${i + 1}`}
-                  style={{fontSize: [`${value}px`]}}
-               >
-                  {meme.memeText[i]}
-               </div>
-            )
-         }
-
-         return prev = elementsArray
-      })
+      setMeme(prev => ({
+         ...prev,
+         textFont: [`${value}px`]
+      }))
    }
-   function getNewImage(){
+
+   function getNewImage() {
       const randomNumber = Math.floor(Math.random() * allMemes.length)
       const url = allMemes[randomNumber].url
 
@@ -121,6 +109,12 @@ export default function Meme() {
    return (
       <main>
 
+         <input
+            type="text"
+            placeholder={`Next New Text Font: ${meme.textFont}`}
+            onChange={newFontSize}
+         />
+
          <div className="form">
             {inputElements}
             <button
@@ -137,16 +131,12 @@ export default function Meme() {
             </button>
          </div>
 
-         <div className="meme">
+         <div
+            className="meme"
+         >
             <img src={meme.randomImage} className="meme--image" alt="" />
             {textElements}
          </div>
-
-         <input
-            type="text"
-            placeholder={`Font size: ${meme.textFont}`}
-            onChange={newFontSize}
-         />
 
       </main>
    )
@@ -157,4 +147,5 @@ export default function Meme() {
       console.log(meme.memeText)
       console.log(`${meme.textCount} ${meme.randomImage} ${meme.textFont}`)
    }, [meme])
+
 */

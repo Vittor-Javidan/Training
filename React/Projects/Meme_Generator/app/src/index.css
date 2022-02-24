@@ -71,6 +71,7 @@ main {
 
 .meme--text {
    position: absolute;
+   cursor: move;
    font-family: impact;
    text-transform: uppercase;
    color: white;
