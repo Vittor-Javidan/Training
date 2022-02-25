@@ -1,13 +1,15 @@
-export default function Dice(props) {
+import React from "react"
 
-   const diceArray = props.diceNumbersObject.map(diceNumber => (
+export default function Dice({diceNumbersObject}) {
+
+   const [diceElements, setDiceElements] = React.useState(diceNumbersObject.map(diceNumber => (
 
       <div className="die-face">
          <h2 className="die-number">
             {diceNumber.value}
          </h2>
       </div>
-   ))
+   )))
 
-   return diceArray
+   return diceElements
 }

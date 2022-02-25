@@ -40,6 +40,7 @@ export default function App() {
       }
    }))
 
+   //Console Feedback
    React.useEffect(() => {
       console.log(diceNumbersArray)
       console.log(diceNumbersObject)
