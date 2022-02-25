@@ -1,5 +1,6 @@
 import React from "react"
 import Dice from "./Components/Dice"
+import {nanoid} from "nanoid"
 
 function newDiceNumbers(dieAmount) {
 
@@ -7,7 +8,7 @@ function newDiceNumbers(dieAmount) {
    for (let i = 1; i <= dieAmount; i++) {
       newDiceObjectArray.push(
          {
-            id: i,
+            id: nanoid(),
             isSelected: false,
             value: (Math.ceil(Math.random() * 6))
          }
