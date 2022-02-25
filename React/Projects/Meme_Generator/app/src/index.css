@@ -93,5 +93,6 @@ main {
 }
 
 .meme--image {
-   width: 100%;
+   height: inherit;
+   max-height: 500px;
 }
