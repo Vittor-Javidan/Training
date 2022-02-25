@@ -1,30 +1,33 @@
 import React from "react"
 import Dice from "./Components/Dice"
 
-function allNewDiceNumber(dieAmount) {
+function newDiceNumbers(dieAmount) {
 
-   const newDiceArray = []
+   const newDiceObjectArray = []
    for (let i = 1; i <= dieAmount; i++) {
-      newDiceArray.push((Math.ceil(Math.random() * 6)))
+      newDiceObjectArray.push(
+         {
+            id: i,
+            isSelected: false,
+            value: (Math.ceil(Math.random() * 6))
+         }
+      )
    }
-   return newDiceArray
+   return newDiceObjectArray
 }
 
 function updateDiceObjects(
    event,
    diceAmount,
-   setNumbersArray,
    setDiceNumbersObject
 ) {
    event.stopPropagation()
 
-   const newNumbersArray = allNewDiceNumber(diceAmount)
-   setNumbersArray(newNumbersArray)
-   setDiceNumbersObject((oldObject) => newNumbersArray.map((number) => {
-      return {
-         value: number,
-         isSelected: oldObject.isSelected ? oldObject.isSelected : false
-      }
+   const newDiceObjectArray = newDiceNumbers(diceAmount)
+   setDiceNumbersObject(newDiceObjectArray.map(oldObject => oldObject = {
+      ...oldObject,
+      value: oldObject.value,
+      isSelected: oldObject.isSelected ? oldObject.isSelected : false
    }))
    console.log("dice updated")
 }
@@ -32,19 +35,12 @@ function updateDiceObjects(
 export default function App() {
 
    const [diceAmount, setDiceAmount] = React.useState(10)
-   const [diceNumbersArray, setNumbersArray] = React.useState(allNewDiceNumber(diceAmount))
-   const [diceNumbersObject, setDiceNumbersObject] = React.useState(diceNumbersArray.map((number) => {
-      return {
-         value: number,
-         isSelected: false
-      }
-   }))
+   const [diceNumbersObject, setDiceNumbersObject] = React.useState(newDiceNumbers(diceAmount))
 
    //Console Feedback
    React.useEffect(() => {
-      console.log(diceNumbersArray)
       console.log(diceNumbersObject)
-   }, [diceNumbersArray, diceNumbersObject])
+   }, [diceNumbersObject])
 
    return (
       <main>
@@ -57,16 +53,15 @@ export default function App() {
                updateDiceObjects(
                   event,
                   diceAmount,
-                  setNumbersArray,
                   setDiceNumbersObject
                )
             }}
          >
             Roll
          </button>
-         <input 
+         <input
             placeholder={`Insert Dices Amount: ${diceAmount}`}
-            onChange={(event)=>{
+            onChange={(event) => {
                setDiceAmount(event.target.value)
             }}
          />
