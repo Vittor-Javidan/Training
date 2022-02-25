@@ -1,20 +1,14 @@
 import React from "react"
 
-export default function Dice({ diceNumbersObject }) {
+export default function Dice({ value,  isSelected}) {
 
-   const diceElements = diceNumbersObject.map(diceNumber => (
+   const style = {backgroundColor: isSelected ? "green" : "white" }
 
-      <div
-         key={`elementKey_${diceNumber.id}`}
-         className="die-face"
-      >
-         <h2
-            className="die-number"
-         >
-            {diceNumber.value}
+   return (
+      <div className="dice-face" style={style}>
+         <h2 className="die-number">
+            {value}
          </h2>
       </div>
-   ))
-   
-   return diceElements
+   )
 }
