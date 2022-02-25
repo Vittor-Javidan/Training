@@ -1,4 +1,6 @@
 import React from "react"
+import InputText from "./InputText"
+import OutputText from "./OutputText"
 
 //Scripts
 import newText from "./Scripts/newText"
@@ -27,7 +29,12 @@ export default function Meme() {
          .then(data => setAllMemes(data.data.memes))
 
    }, [])
-   
+
+   React.useEffect(() => {
+      console.log(meme.memeText)
+      console.log(`${meme.textCount} ${meme.randomImage} ${meme.textFont}`)
+   }, [meme])
+
    return (
       <main>
 
@@ -38,7 +45,7 @@ export default function Meme() {
          />
 
          <div className="form">
-            {inputElements}
+            <InputText inputElements={inputElements}/>
             <button
                className="form--button"
                onClick={(e)=> newText(e, meme, setMeme, setTextElements, setInputElement)}
@@ -57,7 +64,7 @@ export default function Meme() {
             className="meme"
          >
             <img src={meme.randomImage} className="meme--image" alt="" />
-            {textElements}
+            <OutputText textElements={textElements}/>
          </div>
 
       </main>
@@ -65,8 +72,5 @@ export default function Meme() {
 }
 
 /*
-   React.useEffect(() => {
-      console.log(meme.memeText)
-      console.log(`${meme.textCount} ${meme.randomImage} ${meme.textFont}`)
-   }, [meme])
+
 */

@@ -1,37 +1,9 @@
 import Draggable from "react-draggable"
+import handleTextChange from "./handleTextChange"
 
 export default function newText(e, meme, setMeme, setTextElements, setInputElement) {
-         
-   function handleTextChange(e) {
 
-      e.stopPropagation()
-
-      const { id, value } = e.target
-      let textArray = meme.memeText
-      textArray[id - 1] = value
-      setMeme(prev => prev = {
-         ...prev,
-         memeText: textArray
-      })
-
-      setTextElements(prev => {
-
-         let elementsArray = [...prev]
-         elementsArray[id - 1] = (
-            <Draggable key={`teKey${id}`}>
-               <div
-                  className="meme--text top"
-                  id={`textElement${id}`}
-                  style={{ fontSize: meme.textFont }}
-               >
-                  {value}
-               </div>
-            </Draggable>
-         )
-
-         return prev = elementsArray
-      })
-   }
+   e.stopPropagation()
 
    setMeme(prev => prev = {
       ...prev,
@@ -47,7 +19,7 @@ export default function newText(e, meme, setMeme, setTextElements, setInputEleme
          id={meme.textCount + 1}
          placeholder={`Text ${meme.textCount + 1}`}
          value={meme.memeText[meme.textCount]}
-         onChange={handleTextChange}
+         onChange={(e)=> handleTextChange(e, meme, setMeme, setTextElements)}
       />
    ])
 
