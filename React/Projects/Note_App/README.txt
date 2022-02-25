@@ -10,4 +10,4 @@ features that i had to implement in this project:
    - Sync notes with localStorage (done)
    - Add note summary title (done)
    - Move modified notes to the top of the list (done)
-   - Delete notes
+   - Delete notes (done)
