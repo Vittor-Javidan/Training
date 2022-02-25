@@ -10,7 +10,7 @@ function allNewDiceNumber(dieAmount) {
    return newDiceArray
 }
 
-function updateDices(
+function updateDiceObjects(
    event,
    diceAmount,
    setNumbersArray,
@@ -54,7 +54,7 @@ export default function App() {
          <button
             className="roll-dice"
             onClick={(event) => {
-               updateDices(
+               updateDiceObjects(
                   event,
                   diceAmount,
                   setNumbersArray,
