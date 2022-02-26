@@ -1,4 +1,4 @@
-export default function newFontSize(e, setMeme) {
+export default function handleFontChange(e, setMeme) {
    const { value } = e.target
 
    setMeme(prev => ({
