@@ -9,4 +9,5 @@ features implemented by me, not included in the tutorial:
 
 -  Scalable Text input amounts
 -  Customizable font Size for each text inputs
--  Freely Text Drag and Drop 
+-  Freely Text Drag and Drop
+-  Code Base Fully Reaorganized ( Now all functions are scripts and object need less information making everything more easy to modified )
