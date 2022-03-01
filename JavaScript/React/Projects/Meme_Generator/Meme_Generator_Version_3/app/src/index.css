@@ -1,0 +1,161 @@
+* {
+   box-sizing: border-box;
+}
+
+body {
+   font-family: "Karla", sans-serif;
+   margin: 0;
+}
+
+main {
+   padding: 36px;
+}
+
+.header {
+   display: flex;
+   align-items: center;
+   height: 65px;
+   background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+   color: white;
+   padding: 20px;
+}
+
+.header--image {
+   height: 100%;
+   margin-right: 6px;
+}
+
+.header--title {
+   font-size: 1.25rem;
+   margin-right: auto;
+}
+
+.header--project {
+   font-size: 0.75rem;
+   font-weight: 500;
+}
+
+.form {
+   display: grid;
+   gap: 17px;
+}
+
+.form--input{
+   position: relative;
+}
+
+.form--input--text {
+   font-family: "Karla", sans-serif;
+   width: 100%;
+   height: 30px;
+   border-radius: 5px;
+   border: 1px solid #D5D4D8;
+   text-indent: 5px;
+}
+
+.form--input--delete-btn {
+   position: absolute;
+   top: 5px;
+   right: 3px;
+   background: none;
+   border: none;
+}
+
+.form--input--trash-icon {
+   cursor: pointer;
+}
+
+.form--input--gg-trash {
+   box-sizing: border-box;
+   position: relative;
+   display: block;
+   transform: scale(var(--ggs,1));
+   width: 10px;
+   height: 12px;
+   border: 2px solid transparent;
+   box-shadow:
+       0 0 0 2px,
+       inset -2px 0 0,
+       inset 2px 0 0;
+   border-bottom-left-radius: 1px;
+   border-bottom-right-radius: 1px;
+   margin-top: 4px
+}
+
+.form--input--gg-trash::after,
+.form--input--gg-trash::before {
+   content: "";
+   display: block;
+   box-sizing: border-box;
+   position: absolute
+}
+
+.form--input--gg-trash::after {
+   background: currentColor;
+   border-radius: 3px;
+   width: 16px;
+   height: 2px;
+   top: -4px;
+   left: -5px
+}
+
+.form--input--gg-trash::before {
+   width: 10px;
+   height: 4px;
+   border: 2px solid;
+   border-bottom: transparent;
+   border-top-left-radius: 2px;
+   border-top-right-radius: 2px;
+   top: -7px;
+   left: -2px
+} 
+
+.form--button {
+   grid-column: 1/ -1;
+   height: 40px;
+   font-family: "Karla", sans-serif;
+   border-radius: 5px;
+   background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
+   color: white;
+   border: none;
+   cursor: pointer;
+}
+
+.meme {
+   position: relative;
+   height: min-content;
+   margin: auto;
+   background-size: 100%;
+   text-align: center;
+   word-break: break-all;
+   width: 100%;
+}
+
+.meme--text {
+   position: absolute;
+   cursor: move;
+   font-family: impact;
+   text-transform: uppercase;
+   color: white;
+   letter-spacing: 1px;
+   text-shadow: 2px 2px 0 #000,
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000,
+      0px 2px 0 #000,
+      2px 0px 0 #000,
+      0px -2px 0 #000,
+      -2px 0px 0 #000,
+      2px 2px 5px #000;
+}
+
+.top {
+   left: 0px;
+   top: 0px;
+}
+
+.meme--image {
+   height: inherit;
+   max-width: 100%;
+   height: 700px;
+}
