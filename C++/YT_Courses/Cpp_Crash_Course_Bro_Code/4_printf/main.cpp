@@ -15,10 +15,16 @@ int main()
 	double price = 9999.00;
 	char for_sale = 'Y';
 	
+	cout << "================================================" << endl;
 	printf("Your car is mabe by: %s", "Ford"); cout << endl;
-	printf("YOur car is made by: %s", make.c_str()); cout << endl;
+	printf("Your car is made by: %s", make.c_str()); cout << endl;
+	cout << "================================================" << endl;
 
-
+	printf("Your car is a: %s %s", make.c_str(), model.c_str()); cout << endl;
+	printf("Year %d", year); cout << endl;
+	printf("Price %.2f", price); cout << endl;
+	printf("For sale : %c", for_sale); cout << endl;
+	cout << "================================================" << endl;
 
 	return 0;
 }
