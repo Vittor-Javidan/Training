@@ -14,19 +14,35 @@ public class Window {
     int width, height;
     String title;
     private long glfwWindow;
-    private float r, g, b, a;
-
+    public float r, g, b, a;
 
     private static Window window = null;
+
+    private static Scene currentScene;
 
     private Window() {
         this.width = 1920;
         this.height = 1080;
         this.title = "Mario";
-        r = 0;
-        g = 0;
-        b = 0;
+        r = 1;
+        g = 1;
+        b = 1;
         a = 1;
+    }
+
+    public static void changeScene(int newScene){
+        switch (newScene){
+            case 0:
+                currentScene = new LevelEditorScene();
+                //currentScene.init();
+                break;
+            case 1:
+                currentScene = new LevelScene();
+                break;
+            default:
+                assert false : "Unkown scene '" + newScene + "'";
+                break;
+        }
     }
 
     public static Window get() {
@@ -88,11 +104,14 @@ public class Window {
         glfwShowWindow(glfwWindow);
 
         GL.createCapabilities();
+
+        window.changeScene(0);
     }
 
     public void loop(){
         float beginTime = Time.getTime();
         float endTime;
+        float dt = -1.0f;
 
         while (!glfwWindowShouldClose(glfwWindow)) {
             // Poll events
@@ -101,10 +120,14 @@ public class Window {
             glClearColor(r, g, b, a);
             glClear(GL_COLOR_BUFFER_BIT);
 
+            if(dt >= 0) {
+                currentScene.update(dt);
+            }
+
             glfwSwapBuffers(glfwWindow);
 
             endTime = Time.getTime();
-            float dt = endTime - beginTime;
+            dt = endTime - beginTime;
             beginTime = endTime;
         }
     }
