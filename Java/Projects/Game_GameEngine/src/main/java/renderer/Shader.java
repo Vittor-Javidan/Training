@@ -53,9 +53,6 @@ public class Shader {
                 throw new IOException("Unexpected token '" + secondPattern + "' in '" + filepath + "'");
             }
 
-            System.out.println(vertexSource);
-            System.out.println(fragmentSource);
-
         } catch (IOException e) {
             e.printStackTrace();
             assert false: "Error: Could not open file shader: '" + filepath + "'";
