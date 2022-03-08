@@ -22,6 +22,9 @@ public class Shader {
     private String filepath;
 
     public Shader(String filepath){
+
+        System.out.println("Creating new shader");
+
         this.filepath = filepath;
         try {
             String source = new String(Files.readAllBytes(Paths.get(filepath)));
