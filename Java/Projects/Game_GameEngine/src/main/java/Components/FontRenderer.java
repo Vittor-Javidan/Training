@@ -1,7 +1,5 @@
 package Components;
 
-import jade.Component;
-
 public class FontRenderer extends Component {
 
     @Override

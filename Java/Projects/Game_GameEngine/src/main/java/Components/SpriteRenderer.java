@@ -1,7 +1,6 @@
 package Components;
 
 import imgui.ImGui;
-import jade.Component;
 import jade.Transform;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
