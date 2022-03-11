@@ -6,12 +6,14 @@
         "type": "Components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 0.4189189,
-            "y": 0.20379838,
-            "z": 0.20379838,
+            "x": 0.8220721,
+            "y": 0.6850601,
+            "z": 0.6850601,
             "w": 1.0
           },
           "sprite": {
+            "width": 0.0,
+            "height": 0.0,
             "texCoords": [
               {
                 "x": 1.0,
@@ -36,12 +38,12 @@
       {
         "type": "Components.Rigidbody",
         "properties": {
-          "colliderType": 7,
-          "friction": 97.8,
+          "colliderType": 0,
+          "friction": 0.8,
           "velocity": {
-            "x": 81.0,
-            "y": 110.5,
-            "z": 81.0
+            "x": 0.0,
+            "y": 0.5,
+            "z": 0.0
           }
         }
       }
@@ -71,9 +73,11 @@
             "w": 1.0
           },
           "sprite": {
+            "width": 0.0,
+            "height": 0.0,
             "texture": {
               "filepath": "assets/images/blendImage2.png",
-              "textID": 3,
+              "texID": 3,
               "width": 256,
               "height": 256
             },
