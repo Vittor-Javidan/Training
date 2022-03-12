@@ -4,6 +4,8 @@ require('express-async-errors')
 const express = require('express')
 const app = express()
 
+const mainRouter = require('./routes/main')                             // Imports the router from ./routes/main wich handles login and dashboard
+
 const notFoundMiddleware = require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
@@ -11,12 +13,10 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 app.use(express.static('./public'))
 app.use(express.json())
 
+app.use('/api/v1', mainRouter)                                          // Makes routes '/api/v1' be redirected to mainRouter
+
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
-
-app.get("/", (req, res) => {
-   res.status(200).send("./public/index.html")
-})
 
 const port = process.env.PORT || 3000
 

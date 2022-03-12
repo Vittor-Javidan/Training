@@ -6,7 +6,7 @@ const resultDOM = document.querySelector('.result')
 const btnDOM = document.querySelector('#data')
 const tokenDOM = document.querySelector('.token')
 
-formDOM.addEventListener('submit', async (e) => {
+formDOM.addEventListener('submit', async (e) => {     // Sing to the server to receive a token
 
    formAlertDOM.classList.remove('text-success')
    tokenDOM.classList.remove('text-success')
@@ -23,8 +23,8 @@ formDOM.addEventListener('submit', async (e) => {
       formAlertDOM.textContent = data.msg
 
       formAlertDOM.classList.add('text-success')
-      usernameInputDOM = ''
-      passwordInputDOM = ''
+      usernameInputDOM.value = ''
+      passwordInputDOM.value = ''
 
       localStorage.setItem('token', data.token)
       resultDOM.innerHTML = ''
@@ -46,7 +46,7 @@ formDOM.addEventListener('submit', async (e) => {
    }, 2000)
 })
 
-btnDOM.addEventListener('click', async () => {
+btnDOM.addEventListener('click', async () => {     // Requests the data using the token inside Local Storage
 
    const token = localStorage.getItem('token')
 
