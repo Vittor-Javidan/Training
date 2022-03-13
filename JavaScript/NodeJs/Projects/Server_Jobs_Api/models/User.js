@@ -23,7 +23,6 @@ const UserSchema = new moongose.Schema({                                        
       type: String,                                                                                                                                   // define "password" as a String type
       require: [true, 'Please provide a password'],                                                                                                   // the field "password" must be present to be a valid data to send to database
       minlength: 6,                                                                                                                                   // defines min lenght to the field "password"
-      maxlenght: 12                                                                                                                                   // defines max lenght to the field "password"
    }
 })
 

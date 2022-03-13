@@ -6,3 +6,4 @@ Technologies used:
    nodejs
    express
    http-status-codes (Which contains shortcuts to make the code more meaning about the status codes)
+   bcryptjs (to hash passwords from new registered users)

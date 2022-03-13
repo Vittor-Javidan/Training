@@ -1,7 +1,7 @@
 const User = require('../models/User')                                                                                                             // Require the User model defined by the user Schema
 const { StatusCodes } = require('http-status-codes')                                                                                               // Require StatusCode class from http-status-codes dependencie, to let us define status using words instead of numbers
 const { BadRequestError } = require('../errors/index')                                                                                             // Require our custom error BadRequestError from errors folder on index.js file
-
+const bcrypt = require('bcryptjs')                                                                                                                 // Require bcrypt to encrypt the user password before send to database
 
 const register = async (req, res) => {                                                                                                             // Handles post request to register users on database
 
@@ -10,7 +10,15 @@ const register = async (req, res) => {                                          
       throw new BadRequestError('SERVER ERROR: the fields name, email or password cannot be empty')                                                        // Creates a new instance of BadRequestError if the user don't provide any of the required fields
    }
 
-   const user = await User.create({ ...req.body })                                                                                                         // Creates a new user using the fields "name", "email", and "password" inside req.body
+   const salt = await bcrypt.genSalt(10)                                                                                                                   // Generate a salt to be used in the hash process
+   const hashedPassword = await bcrypt.hash(password, salt)                                                                                                // Hashs the password using the salt
+   const tempUser = {                                                                                                                                      // A new object to replace req.body, but with the password hashed
+      name,                                                                                                                                                       // Name that cames from req.body
+      email,                                                                                                                                                      // Email that cames from req.body
+      password: hashedPassword                                                                                                                                    // Password that cames from req.body after being hashed by bcrypt
+   }
+
+   const user = await User.create({ ...tempUser })                                                                                                         // Creates a new user using the fields "name", "email", and "password" inside req.body
    res.status(StatusCodes.CREATED).json({ user })                                                                                                          // Server response to the post request
 }
 
