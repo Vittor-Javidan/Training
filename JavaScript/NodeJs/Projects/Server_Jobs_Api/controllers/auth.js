@@ -1,7 +1,6 @@
 const User = require('../models/User')                                                                                                             // Require the User model defined by the user Schema
 const { StatusCodes } = require('http-status-codes')                                                                                               // Require StatusCode class from http-status-codes dependencie, to let us define status using words instead of numbers
 const { BadRequestError } = require('../errors/index')                                                                                             // Require our custom error BadRequestError from errors folder on index.js file
-const bcrypt = require('bcryptjs')                                                                                                                 // Require bcrypt to encrypt the user password before send to database
 
 const register = async (req, res) => {                                                                                                             // Handles post request to register users on database
 
