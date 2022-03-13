@@ -3,6 +3,9 @@ require('express-async-errors')
 const express = require('express')
 const app = express();
 
+// connectDB
+const connectDB = require('./db/connect')                                                                                                             // require connectDB function to connect to database
+
 // routers
 const authRouter = require('./routes/auth')                                                                                                           // require auth Router from routes folder
 const jobsRouter = require('./routes/jobs')                                                                                                           // require jobs Router from routes folfer
@@ -26,6 +29,7 @@ const port = process.env.PORT || 3000
 const start = async () => {
 
    try {
+      await connectDB(process.env.MONGO_URI)                                                                                                          // connects to database using MONGO_URI, which is inside the file .env
       app.listen(port, () => {
          console.log(`Server is listening on port ${port}...`)
       })
