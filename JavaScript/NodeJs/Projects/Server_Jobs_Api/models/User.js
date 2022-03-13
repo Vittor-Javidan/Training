@@ -1,5 +1,6 @@
 const moongose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const UserSchema = new moongose.Schema({                                                                                                  // Creates a new Schema to format data before send to database
 
@@ -32,5 +33,13 @@ UserSchema.pre('save', async function() {                                       
    const salt = await bcrypt.genSalt(10)                                                                                                        // Generate a salt to be used in the hash process
    this.password = await bcrypt.hash(this.password, salt)                                                                                       // Hashs the password using the salt
 })
+
+UserSchema.methods.createJWT = function () {                                                                                         // Creates a  JWT sing method for instances of User model use after their creations
+
+   return jwt.sign({                                                                                                                            // Creates and return a token to be send after to the user browser
+      userId: this._id,                                                                                                                               // gets the "_id" from database
+      name: this.name,                                                                                                                                // gets the "name" from database
+   }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME })                                                                          // Jwt secret with expiration time defined on .env file
+}
 
 module.exports = moongose.model('User', UserSchema)
