@@ -1,4 +1,5 @@
 const moongose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
 const UserSchema = new moongose.Schema({                                                                                                  // Creates a new Schema to format data before send to database
 
@@ -24,6 +25,12 @@ const UserSchema = new moongose.Schema({                                        
       require: [true, 'Please provide a password'],                                                                                                   // the field "password" must be present to be a valid data to send to database
       minlength: 6,                                                                                                                                   // defines min lenght to the field "password"
    }
+})
+
+UserSchema.pre('save', async function() {                                                                                            // moongose middleware to custom format properties before save in the database. Is important to use normal function format instead arrow funtion to allow you to use the "this" keyword.
+
+   const salt = await bcrypt.genSalt(10)                                                                                                        // Generate a salt to be used in the hash process
+   this.password = await bcrypt.hash(this.password, salt)                                                                                       // Hashs the password using the salt
 })
 
 module.exports = moongose.model('User', UserSchema)
