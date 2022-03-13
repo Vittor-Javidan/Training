@@ -42,4 +42,9 @@ UserSchema.methods.createJWT = function () {                                    
    }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME })                                                                          // Jwt secret with expiration time defined on .env file
 }
 
-module.exports = moongose.model('User', UserSchema)
+UserSchema.methods.comparePasswords = async function (password) {                                                                    // Creates a compare password method for instances of User model after their creations
+
+   return await bcrypt.compare(password, this.password)                                                                                         // bcrypt will compare the password given with the one hashed in database
+}
+
+module.exports = moongose.model('User', UserSchema)                                                                                  // Exports our model "User"
