@@ -1,4 +1,3 @@
-const User = require('../models/User')                                                       // Required User from our models
 const jwt = require('jsonwebtoken')                                                          // Required jwt for token verify
 const { UnauthenticatedError } = require('../errors/index')                                  // Required UnauthenticatedError from index inside errors folders
 
