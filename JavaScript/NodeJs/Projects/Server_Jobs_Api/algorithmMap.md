@@ -22,13 +22,16 @@
                - Job.find
          - route ['/:id']
             - GET: getJob
-               - Job.findOne
+               - checkJob
+                  - Job.findOne
             - DELETE: deleteJob
-               - Job.findOne
+               - checkJob
+                  - Job.findOne
                - Job.findByIdAndRemove
                - getAllJobs
             - PATCH: updateJob
-               - Job.findOne
+               - checkJob
+                  - Job.findOne
                - Job.findByIdAndUpdate
 
    + notFoundMiddleware
