@@ -17,6 +17,7 @@
       - jobsRouter
          - route ['/']
             - POST: createJob
+               - Job.create
             - GET: getAllJobs
          - route ['/:id']
             - GET: getJob
