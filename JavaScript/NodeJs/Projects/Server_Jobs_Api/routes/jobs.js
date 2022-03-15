@@ -1,7 +1,7 @@
 const express = require('express')
 const jobsRouter = express.Router()
 
-const { checkJob, bodyReqCheck } = require('../controllers/middleware/jobs')
+const { checkJob, bodyReqCheck } = require('./middleware/jobs')
 
 const { getAllJobs, getJob, createJob, updateJob, deleteJob 
 } = require('../controllers/jobs')                                                                                                     // require all function from jobs controller
