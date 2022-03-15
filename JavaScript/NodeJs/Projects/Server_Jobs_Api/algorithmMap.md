@@ -22,6 +22,7 @@
                - Job.find
          - route ['/:id']
             - GET: getJob
+               - Job.findOne
             - DELETE: deleteJob
             - PATCH: updateJob
 
