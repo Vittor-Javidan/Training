@@ -24,6 +24,9 @@
             - GET: getJob
                - Job.findOne
             - DELETE: deleteJob
+               - Job.findOne
+               - Job.findByIdAndRemove
+               - getAllJobs
             - PATCH: updateJob
                - Job.findOne
                - Job.findByIdAndUpdate

@@ -68,8 +68,22 @@ const updateJob = async (req, res) => {                                         
    res.status(StatusCodes.OK).json({ job })                                                                 // Send a json feedback with the updated job
 }
 
-const deleteJob = async (req, res) => {
-   res.send('delete job')
+const deleteJob = async (req, res, next) => {                                                            // Handle DELETE method to delete a job
+
+   const { name, userId } = req.user                                                                        // Allow access for the properties "name" and "userId" inside req.user, wich was send by our authentication middleware
+   const { id:jobId } = req.params                                                                          // Allow access for the propertie "id" inside req.params, and set "id" alias to "jobId"
+
+   const job = await Job.findOne({                                                                          // Try to find the user job using both "userId" and "jobId"
+      _id: jobId,                                                                                              // Filter the search in database where "_id" === "jobId"
+      createdBy: userId                                                                                        // Filter the search in database where "createdby" === "userId"
+   })
+   if ( !job ) {                                                                                            // Check if "job" is empty or null
+      throw new NotFoundError(`SERVER ERROR: no job found to delete for ${name}`)                             // Throw Not Found error in case the job don't exist for the current user 
+   }
+
+   await Job.findByIdAndRemove({ _id:jobId, createdBy:userId })                                             // Find the job by "jobId" again, and delete after
+
+   next()                                                                                                   // deleteJob is configure as a middleware to getAllJobs, so the front end can recieve a response with all left jobs to the current user
 }
 
 module.exports = {

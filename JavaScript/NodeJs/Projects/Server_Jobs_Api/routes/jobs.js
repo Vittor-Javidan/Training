@@ -10,7 +10,7 @@ jobsRouter.route('/')                                                           
 
 jobsRouter.route('/:id')                                                                                                               // handles get, delete and patch requests wich cames from './:id' route
    .get(getJob)                                                                                                                           // get request wich handles jobs data request from a single id
-   .delete(deleteJob)                                                                                                                     // delete request wich handles deletion of a job using an id
+   .delete(deleteJob, getAllJobs)                                                                                                         // delete request wich handles deletion of a job using an id, and getAllJobs after to show a feedback of the current left jobs
    .patch(updateJob)                                                                                                                      // patch request wich handle update of a job using an id
 
 module.exports = jobsRouter
