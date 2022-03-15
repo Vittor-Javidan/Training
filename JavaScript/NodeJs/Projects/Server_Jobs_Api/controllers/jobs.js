@@ -20,16 +20,21 @@ const checkJob = async (req, res, next) => {                                    
    next()                                                                                                   // allows the route to continue to the next middlewares/methods
 }
 
-const createJob = async (req, res) => {                                                                  // Handle POST method to create a job
+const bodyReqCheck = (req, res, next) => {
 
-   const { company, position } = req.body                                                                   // Allow access to specific filds from "req.body"
-   if ( !company || !position ){                                                                            // Checks if the properties "company" or "position" are empty
-      throw new BadRequestError('SERVER ERROR: the field "company" and/or "position" cannot be empty')         // throws a bad request error in case "company" or "position" are empty
+   const { company, position } = req.body                                                                   // Allow access for the properties "company" and "position" inside req.body
+   if ( !company || !position ){                                                                            // Checks if "company" and/or "position" is empty
+      throw new BadRequestError('SERVER ERROR: the field "company" and/or "position" cannot be empty')         // Throws a Bad Request error in case "company" and/or "position" are empty
    }
 
-   job = await Job.create({                                                                              // creates a job using our model "Job" 
-      ...req.body,                                                                                          // it will spread the properties from req.body
-      createdBy: req.user.userId                                                                            // will fill the property "createdBy" with the value of "req.user.userId" from authentication step
+   next()
+}
+
+const createJob = async (req, res) => {                                                                  // Handle POST method to create a job
+
+   job = await Job.create({                                                                                 // creates a job using our model "Job" 
+      ...req.body,                                                                                             // it will spread the properties from req.body
+      createdBy: req.user.userId                                                                               // will fill the property "createdBy" with the value of "req.user.userId" from authentication step
    })
    res.status(StatusCodes.CREATED).json({ job })                                                            // Send a feedback json response with the object "job"
 }
@@ -51,11 +56,6 @@ const getJob = async (req, res) => {                                            
 const updateJob = async (req, res) => {                                                                  // Handle PATCH method to update a job       
 
    const { id:jobId } = req.params                                                                          // Allow access for the propertie "id" inside req.params, and set "id" alias to jobId
-   const { company, position } = req.body                                                                   // Allow access for the properties "company" and "position" inside req.body
-   if ( !company || !position ){                                                                               // Checks if "company" and/or "position" is empty
-      throw new BadRequestError('SERVER ERROR: the field "company" and/or "position" cannot be empty')            // Throws a Bad Request error in case "company" and/or "position" are empty
-   }
-
    job = await Job.findByIdAndUpdate(                                                                       // find the job again using his id, and update using the information of the req.body. I checked if the method alone was enough to garantee if the users cannot modify each others job, but they can, so i just decided to use "findOne" before "findByIdAndUpdate" to throw a NotFound error in case the user tries to modify others job.
       {_id:jobId},                                                                                             // Filter the search where "_id" === "jobId"
       req.body,                                                                                                // Update the job using the properties inside req.body
@@ -81,5 +81,6 @@ module.exports = {
    createJob,
    updateJob,
    deleteJob,
-   checkJob
+   checkJob,
+   bodyReqCheck
 }

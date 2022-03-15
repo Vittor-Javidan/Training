@@ -17,6 +17,7 @@
       - jobsRouter
          - route ['/']
             - POST: createJob
+               - bodyReqCheck
                - Job.create
             - GET: getAllJobs
                - Job.find
@@ -32,6 +33,7 @@
             - PATCH: updateJob
                - checkJob
                   - Job.findOne
+               - bodyReqCheck
                - Job.findByIdAndUpdate
 
    + notFoundMiddleware
