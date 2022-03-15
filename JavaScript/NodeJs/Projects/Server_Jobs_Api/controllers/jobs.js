@@ -42,8 +42,30 @@ const createJob = async (req, res) => {                                         
    res.status(StatusCodes.CREATED).json({ job })                                                            // Send a feedback json response with the object "job"
 }
 
-const updateJob = async (req, res) => {
-   res.send('update job')
+const updateJob = async (req, res) => {                                                                  // Handle PATCH method to update a job       
+
+   const { name, userId } = req.user                                                                        // Allow access for the properties "name" and "userId" inside req.user, wich was send by our athentication middleware
+   const { id:jobId } = req.params                                                                          // Allow access for the propertie "id" inside req.params, and set "id" alias to jobId
+   const { company, position } = req.body                                                                   // Allow access for the properties "company" and "position" inside req.body
+   if ( !company || !position ){                                                                               // Checks if "company" and/or "position" is empty
+      throw new BadRequestError('SERVER ERROR: the field "company" and/or "position" cannot be empty')            // Throws a Bad Request error in case "company" and/or "position" are empty
+   }
+
+   let job = await Job.findOne({                                                                            // Try to find the user job using both "userId" and "jobId"
+      _id: jobId,                                                                                              // Filter the search where "_id" === "jobId"
+      createdBy: userId                                                                                        // Filter the search where "createdBy" === "userId"
+   })
+   if ( !job ) {                                                                                            // Checks if the "job" variable is empty 
+      throw new NotFoundError(`SERVER ERROR: no job found to update for ${name}`)                              // throw a Not Found error in case the job don't exist
+   }
+
+   job = await Job.findByIdAndUpdate(                                                                       // find the job again using his id, and update using the information of the req.body. I checked if the method alone was enough to garantee if the users cannot modify each others job, but they can, so i just decided to use "findOne" before "findByIdAndUpdate" to throw a NotFound error in case the user tries to modify others job.
+      {_id:jobId},                                                                                             // Filter the search where "_id" === "jobId"
+      req.body,                                                                                                // Update the job using the properties inside req.body
+      { new:true, runValidators:true}                                                                          // options. "new: true" means the variable "job" will store the updated information about the job, instead a copy of the previous state before the update
+   )
+
+   res.status(StatusCodes.OK).json({ job })                                                                 // Send a json feedback with the updated job
 }
 
 const deleteJob = async (req, res) => {

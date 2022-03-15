@@ -25,6 +25,8 @@
                - Job.findOne
             - DELETE: deleteJob
             - PATCH: updateJob
+               - Job.findOne
+               - Job.findByIdAndUpdate
 
    + notFoundMiddleware
    + errorHandlerMiddlewar
