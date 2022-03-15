@@ -19,6 +19,7 @@
             - POST: createJob
                - Job.create
             - GET: getAllJobs
+               - Job.find
          - route ['/:id']
             - GET: getJob
             - DELETE: deleteJob
