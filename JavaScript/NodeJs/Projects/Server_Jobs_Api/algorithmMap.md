@@ -5,6 +5,7 @@
                - User.create
                   - bcrypt.hash
                - user.createJWT
+
          - route ['/login']
             - POST: login
                - User.findOne
@@ -19,17 +20,21 @@
             - POST: createJob
                - bodyReqCheck
                - Job.create
+               
             - GET: getAllJobs
                - Job.find
+
          - route ['/:id']
             - GET: getJob
                - checkJob
                   - Job.findOne
+
             - DELETE: deleteJob
                - checkJob
                   - Job.findOne
                - Job.findByIdAndRemove
                - getAllJobs
+
             - PATCH: updateJob
                - checkJob
                   - Job.findOne

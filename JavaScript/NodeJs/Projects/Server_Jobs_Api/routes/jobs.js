@@ -1,7 +1,9 @@
 const express = require('express')
 const jobsRouter = express.Router()
 
-const { getAllJobs, getJob, createJob, updateJob, deleteJob, checkJob, bodyReqCheck 
+const { checkJob, bodyReqCheck } = require('../controllers/middleware/jobs')
+
+const { getAllJobs, getJob, createJob, updateJob, deleteJob 
 } = require('../controllers/jobs')                                                                                                     // require all function from jobs controller
 
 jobsRouter.route('/')                                                                                                                  // handles post and get requests wich cames from './' route
