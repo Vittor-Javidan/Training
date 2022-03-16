@@ -11,6 +11,7 @@ const auth = (req, res, next) => {                                              
    try {                                                                                                    // try to verify the token and retrieve the payload inside
       const payload = jwt.verify(token, process.env.JWT_SECRET)                                                // stores the payload retrived from the token
       req.user = { userId: payload.userId, name: payload.name}                                                 // creates a new field inside the req containing the decoded userId and name to pass forward to the next middleware or functions
+   
    } catch (error) {                                                                                        // Catchs the error in case the verify fails
       throw new UnauthenticatedError('SERVER ERROR: invalid token')                                            // Throws an UnauthenticateError case the token is invalid
    }
