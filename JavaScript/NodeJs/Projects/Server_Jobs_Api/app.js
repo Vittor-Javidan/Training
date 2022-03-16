@@ -15,7 +15,7 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 app.use(express.json())
 
 app.use('/api/v1/auth', authRouter)                                                                      // redirect all requests from '/api/v1/auth' to authRouter
-app.use('/api/v1/jobs', userAuthMiddleware, jobsRouter)                                                    // redirect all requests from '/api/v1/jobs' to jobsRouter using our authenticateUser middleware
+app.use('/api/v1/jobs', userAuthMiddleware, jobsRouter)                                                  // redirect all requests from '/api/v1/jobs' to jobsRouter using our authenticateUser middleware
 
 app.use(notFoundErrorMiddleware)
 app.use(errorHandlerMiddleware)

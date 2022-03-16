@@ -21,7 +21,7 @@ const bodyReqCheck = (req, res, next) => {                                      
 
    const { company, position } = req.body                                                                   // Allow access for the properties "company" and "position" inside req.body
    if ( !company || !position ){                                                                            // Checks if "company" and/or "position" is empty
-      throw new BadRequestError('SERVER ERROR: the field COMPANY and/or POSITION cannot be empty')         // Throws a Bad Request error in case "company" and/or "position" are empty
+      throw new BadRequestError('SERVER ERROR: the field COMPANY and/or POSITION cannot be empty')             // Throws a Bad Request error in case "company" and/or "position" are empty
    }
 
    next()

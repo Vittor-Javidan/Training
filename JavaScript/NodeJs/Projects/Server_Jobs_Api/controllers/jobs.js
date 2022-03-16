@@ -34,7 +34,7 @@ const updateJob = async (req, res) => {                                         
       { new:true, runValidators:true}                                                                          // options. "new: true" means the variable "job" will store the updated information about the job, instead a copy of the previous state before the update
    )
 
-   res.status(StatusCodes.OK).json({ jobs: job })                                                              // Send a json feedback with the updated job
+   res.status(StatusCodes.OK).json({ jobs: job })                                                           // Send a json feedback with the updated job
 }
 
 const deleteJob = async (req, res, next) => {                                                            // Handle DELETE method to delete a job
