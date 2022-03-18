@@ -1,0 +1,1 @@
+}												// the brace we gonna use to fix our function "Multiply"
