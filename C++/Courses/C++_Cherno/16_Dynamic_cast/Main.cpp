@@ -1,6 +1,8 @@
 #include <iostream>                                                                         // Copy and paste everything from iostream library into this file
 
-class Entity {};                                                                            // Class Entity, used to represent a class to inherith from
+class Entity {                                                                              // class Entity
+   virtual void Printname(){}                                                                  // A dummy method just to make the compiler don't complaim
+};
 class Player : public Entity {};                                                            // Class Player, wich inherit from Entity
 class Enemy : public Entity {};                                                             // Class Enemy, wich inherit form Entity
 
