@@ -31,7 +31,7 @@ public:
 
 		m_OutputStream.open(filepath);
 		WriteHeader();
-		m_CurrentSession = new InstrumentationSession(name);
+		m_CurrentSession = new InstrumentationSession{name};
 	}
 
 	void EndSession() {
@@ -83,14 +83,14 @@ public:
 	}
 };
 
-class Timer {
+class InstrumentationTimer {
 private:
 	const char* m_Name;
 	bool m_Stopped;
 	std::chrono::time_point<std::chrono::steady_clock> m_StartTimepoint;
 
 public:
-	Timer(const char* name)
+	InstrumentationTimer(const char* name)
 		: m_Name(name), m_Stopped(false)
 	{
 		m_StartTimepoint = std::chrono::high_resolution_clock::now();
@@ -100,15 +100,15 @@ public:
 
 		auto endTimepoint = std::chrono::high_resolution_clock::now();
 
-		long long start = std::chrono::time_point_cast<std::chrono::milliseconds>(m_StartTimepoint).time_since_epoch().count();
-		long long end = std::chrono::time_point_cast<std::chrono::milliseconds>(endTimepoint).time_since_epoch().count();
+		long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
+		long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
 
-		std::cout << m_Name << ": " << (end - start) << "ms \n";
+		Instrumentor::Get().WriteProfile({ m_Name, start, end });
 
 		m_Stopped = true;
 	}
 
-	~Timer() {
+	~InstrumentationTimer() {
 
 		if (!m_Stopped) {
 			Stop();
@@ -116,9 +116,17 @@ public:
 	}
 };
 
+#define PROFILING 1
+#if PROFILING
+	#define PROFILE_SCOPE(name) InstrumentationTimer timer##__LINE__(name)
+	#define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
+#else
+	#define PROFILE_SCOPE(name)
+#endif
+
 void Function1() {
 
-	Timer time("Function1");
+	PROFILE_FUNCTION();
 
 	for (int i = 0; i < 1000; i++)
 		std::cout << "Hello World #" << i << std::endl;
@@ -126,16 +134,28 @@ void Function1() {
 
 void Function2() {
 
-	Timer time("Function2");
+	PROFILE_FUNCTION();
 
 	for (int i = 0; i < 1000; i++)
 		std::cout << "Hello World #" << sqrt(i) << std::endl;
 }
 
-int main() {
+void RunBenchmarks() {
+
+	PROFILE_FUNCTION();
+	std::cout << "Running Benchmarks... \n";
 
 	Function1();
 	Function2();
+}
+
+int main() {
+
+	Instrumentor::Get().BeginSession("Profile");
+
+	RunBenchmarks();
+
+	Instrumentor::Get().EndSession();
 
 	std::cin.get();
 }
