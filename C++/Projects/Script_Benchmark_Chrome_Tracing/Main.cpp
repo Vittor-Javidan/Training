@@ -4,11 +4,13 @@
 #include <chrono>
 #include <algorithm>
 #include <fstream>
+#include <thread>
 
 struct ProfileResult {
 
 	std::string Name;
 	long long Start, End;
+	uint32_t ThreadID;
 };
 
 struct InstrumentationSession {
@@ -57,7 +59,7 @@ public:
 		m_OutputStream << "\"name\":\"" << name << "\",";
 		m_OutputStream << "\"ph\":\"X\",";
 		m_OutputStream << "\"pid\":0,";
-		m_OutputStream << "\"tid\":0,";
+		m_OutputStream << "\"tid\":" << result.ThreadID << ",";
 		m_OutputStream << "\"ts\":" << result.Start;
 		m_OutputStream << "}";
 
@@ -103,7 +105,8 @@ public:
 		long long start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
 		long long end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
 
-		Instrumentor::Get().WriteProfile({ m_Name, start, end });
+		uint32_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
+		Instrumentor::Get().WriteProfile({ m_Name, start, end, threadID });
 
 		m_Stopped = true;
 	}
@@ -124,15 +127,15 @@ public:
 	#define PROFILE_SCOPE(name)
 #endif
 
-void Function1() {
+void PrintFunction(int value) {
 
 	PROFILE_FUNCTION();
 
 	for (int i = 0; i < 1000; i++)
-		std::cout << "Hello World #" << i << std::endl;
+		std::cout << "Hello World #" << (i + value) << std::endl;
 }
 
-void Function2() {
+void PrintFunction() {
 
 	PROFILE_FUNCTION();
 
@@ -144,9 +147,11 @@ void RunBenchmarks() {
 
 	PROFILE_FUNCTION();
 	std::cout << "Running Benchmarks... \n";
+	std::thread a([]() { PrintFunction(2); });
+	std::thread b([]() { PrintFunction(); });
 
-	Function1();
-	Function2();
+	a.join();
+	b.join();
 }
 
 int main() {
