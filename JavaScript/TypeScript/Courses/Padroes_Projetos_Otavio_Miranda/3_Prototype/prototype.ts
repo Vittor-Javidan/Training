@@ -1,8 +1,8 @@
-interface Prototype {							// Interface to force the classes to implement the clone method
-        clone(): Prototype							// clone method
+interface tsPrototype {							// Interface to force the classes to implement the clone method
+        clone(): tsPrototype							// clone method
 }
 
-class Person implements Prototype {					// Person will represent one of the possible prototypes
+class tsPerson implements tsPrototype {					// Person will represent one of the possible prototypes
         constructor(public name: string, public age: number) {}			// Constructor with a string name and number age
 
         clone(): this {								// Clone method implemented from the Prototype interface
@@ -11,7 +11,7 @@ class Person implements Prototype {					// Person will represent one of the poss
         }
 }
 
-const person1 = new Person("Vittor", 28)				// Person instantiation
+const person1 = new tsPerson("Vittor", 28)				// Person instantiation
 const person2 = person1.clone()						// Clone of person1. The person1 will be the person2 prototype
 
 console.log(person1.name)						// Person1 name
