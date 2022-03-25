@@ -1,39 +1,49 @@
-class Person {
+class Person {									// Class Person
 
-	#age = 0
-	#name = ""
-	#middlename = "" 
-	#lastname = ""
-
-	static builderInstance
+	#age = 0									// Private age property
+	#name = ""									// Private name property
+	#middlename = "" 								// Private middlename property
+	#lastname = ""									// Private lasname pproperty						
 
 	/**@param {Number} age*/
-	setAge(age) {
+	setAge(age) {									// age setter
 		this.#age = age
-		return this
+		return this									// returns this for method chainning
 	}
 
 	/**@param {String} name*/
-	setName(name) {
+	setName(name) {									// name setter
 		this.#name = name
-		return this
+		return this									// returns this for method chainning
 	}
 
 	/**@param {String} middlename */
-	setMiddleName(middlename) {
+	setMiddlename(middlename) {							// middlename setter
 		this.#middlename = middlename
-		return this
+		return this									// returns this for method chainning
 	}
 
 	/**@param {String} lastname */
-	setLastName(lastname) {
+	setLastname(lastname) {								// lastname setter
 		this.#lastname = lastname
-		return this
+		return this									// returns this for method chainning
 	}
 
-	getProperties(){
+	setInfo({									// All properties setter
+		_age,
+		_name,
+		_middlename,
+		_lastname
+	}){
+		this.#age = _age
+		this.#name = _name
+		this.#middlename = _middlename
+		this.#lastname = _lastname
+	}
 
-		return {
+	getInfo(){									// All properties getter
+
+		return {									// returns a object with all properties
 			age: this.#age,
 			name: this.#name,
 			middlename: this.#middlename,
@@ -41,56 +51,76 @@ class Person {
 		}
 	}
 
-	static builder () {
+	static builder () {								// Static builder, to call the builder without the need to instantiate the person.
 		return new PersonBuilder()
 	}
 }
 
-class PersonBuilder{
+class PersonBuilder{								// PersonBuilder class
 
-	#age; #name; #middlename; #lastname
+	#age; #name; #middlename; #lastname						// private properties to build the person
 
 	/** @param {Number} age */
-	setAge(age) {
+	setAge(age) {									// age setter
 		this.#age = age
-		return this
+		return this									// returns this for method chainning
 	}
 
 	/**@param {String} name*/
-	setName(name) {
+	setName(name) {									// name setter
 		this.#name = name
-		return this
+		return this									// returns this for method chainning
 	}
 
 	/**@param {String} middlename */
-	setMiddleName(middlename) {
+	setMiddlename(middlename) {							// middlename setter
 		this.#middlename = middlename
-		return this
+		return this									// returns this for method chainning
 	}
 
 	/**@param {String} lastname */
-	setLastName(lastname) {
+	setLastname(lastname) {								// lastname setter
 		this.#lastname = lastname
-		return this
+		return this									// returns this for method chainning
 	}
 
-	build() {
-		let person = new Person
-		person  .setAge(this.#age)
+	build() {									// build method to build a new Person instance using all private properties
+		let person = new Person								// Instantiate a Person
+		person  .setAge(this.#age)							// Chainning methods configuring the person
 			.setName(this.#name)
-			.setMiddleName(this.#middlename)
-			.setLastName(this.#lastname)
+			.setMiddlename(this.#middlename)
+			.setLastname(this.#lastname)
 
-		return person
+		return person									// return the Person instance
 	}
 
 }
 
-const person = Person.builder()
+
+// ================================================================================================================================================================
+
+const person1 = Person.builder()						// Person instance through the builder
 	.setAge(28)
 	.setName("Vittor")
-	.setMiddleName("C S")
-	.setLastName("Javidan")
+	.setMiddlename("C S")
+	.setLastname("Javidan")
 	.build()
 
-console.log(person.getProperties())
+const person2 = new Person()							// Person instance directly through setters
+person2
+	.setAge(28)
+	.setName("Vittor")
+	.setMiddlename("C S")
+	.setLastname("Javidan")
+
+const person3 = new Person()							// Person instance directly through object
+person3.setInfo({
+	_name: "Vittor",
+	_age: 28,
+	_middlename: "C S",
+	_lastname: "Javidan"
+})
+
+console.log(person1.getInfo())
+console.log(person2.getInfo())
+console.log(person3.getInfo())
