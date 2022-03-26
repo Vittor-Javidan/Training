@@ -4,23 +4,36 @@ import data from './Data'                                                       
 
 export default function App() {                                                                     // Main App Component
 
-    const [tours, setTours] = React.useState(data)                                                  // tours state, wich contains a array of possible tours
+    const [tours, setTours] = React.useState(data)                                                      // tours state, wich contains a array of possible tours
 
-    if(tours.length === 0) {                                                                            // If the tours array got empty, we just refresh it again
-        return (
-            <main>
-                <div className='title'>
-                    <h2>No tours left, I DONT NEED YOUR MONEY!!! GET OUT!!</h2>
-                    <button className='btn' onClick={() => {setTours(data)}} >Refresh</button>          {/* Button responsiable to trigger the refresh database*/}
-                </div>
-            </main>
-        )
+    const RefreshButton = () => {                                                                       // Returns a Refresh Button element
+        return <button className='btn' onClick={() => {setTours(data)}} >Refresh</button>  
+    }
 
-    } else {
+    const EmptyTourLayout = () => {                                                                     // Returns the emptyLayout element
         return (
-            <main>
-                <Tours tours={tours} setTours={setTours} />
-            </main>
+            <div className='title'>
+                <h2>No tours left, I DONT NEED YOUR MONEY!!! GET OUT!!</h2>
+                <RefreshButton />
+            </div>
         )
     }
+
+    const TourLayout = () => {                                                                          // Returns the TourLayout Element
+        return <Tours tours={tours} setTours={setTours} />
+    }
+
+    const TourLayoutHandler = () => {                                                                   // Handles the choice between the TourLayout or EmptyTourLayout
+        return (
+            tours.length === 0                                                                              // If the tours array got empty, we just refresh it again
+                ? <EmptyTourLayout />
+                : <TourLayout />
+        )
+    }
+
+    return (                                                                                            // Returns the App Logics JSX Structure
+        <main>
+            <TourLayoutHandler />
+        </main>
+    )
 }
