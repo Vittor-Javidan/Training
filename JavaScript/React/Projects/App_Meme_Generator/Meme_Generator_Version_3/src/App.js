@@ -13,19 +13,15 @@ export const AppContext = createContext()
 export default function App() {
 
    const [allMemes, setAllMemes] = useState([])
-   const [meme, setMeme] = useState(() => (
-      {
-         memeText: []
-      }
-   ))
+   const [texts, setTexts] = useState([])
    const [fontSize, setFontSize] = useState(40)
    const [memeImage, setMemeImage] = useState("http://i.imgflip.com/1bij.jpg")
 
    const props = {
-      allMemes,   setAllMemes,
-      meme,       setMeme,
-      memeImage,   setMemeImage,
-      fontSize,   setFontSize
+      allMemes,      setAllMemes,
+      texts,         setTexts,
+      memeImage,     setMemeImage,
+      fontSize,      setFontSize
    }
 
    useEffect(async () => {

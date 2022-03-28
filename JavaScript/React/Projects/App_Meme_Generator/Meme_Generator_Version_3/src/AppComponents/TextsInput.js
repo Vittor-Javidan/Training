@@ -3,10 +3,10 @@ import { AppContext } from "../App"
 
 export default function TextsInput(){
 
-   const {meme, setMeme} = useContext(AppContext)
+   const {texts, setTexts} = useContext(AppContext)
 
    let inputElementsArray = []
-   for (let i = 1; i <= meme.memeText.length; i++) {
+   for (let i = 1; i <= texts.length; i++) {
       inputElementsArray[i - 1] = (
          <div className="form--input" key={`key${i}`}>
             <input
@@ -14,18 +14,15 @@ export default function TextsInput(){
                type="text"
                id={i}
                placeholder={`Text ${i}`}
-               value={meme.memeText[i - 1]}
+               value={texts[i - 1]}
                onChange={(e)=> {
                   e.stopPropagation()
 
                   const { id, value } = e.target
-                  let textArray = meme.memeText
-                  textArray[id - 1] = value
+                  let textArray = texts
+                  textArray[Number(id) - 1] = value
                
-                  setMeme(prev => prev = {
-                     ...prev,
-                     memeText: textArray
-                  })
+                  setTexts([...textArray])
                }}
             />
             <button
@@ -37,22 +34,19 @@ export default function TextsInput(){
    
                   const id = Number(e.target.id)
                   let textArray = []
-                  if(id === meme.memeText.length){
-                     for(let i = 0; i < meme.memeText.length; i++){
+                  if(id === texts.length){
+                     for(let i = 0; i < texts.length; i++){
                         if(i !== id - 1){
-                           textArray.push(meme.memeText[i])
+                           textArray.push(texts[i])
                            
                         }
                      }
                   } else {
-                     textArray = meme.memeText
+                     textArray = texts
                      textArray[id - 1] = ""
                   }
                
-                  setMeme(prev => prev = {
-                     ...prev,
-                     memeText: textArray
-                  })
+                  setTexts([...textArray])
                }}
             >
                <i className="form--input--gg-trash form--input--trash-icon" id={i}></i>

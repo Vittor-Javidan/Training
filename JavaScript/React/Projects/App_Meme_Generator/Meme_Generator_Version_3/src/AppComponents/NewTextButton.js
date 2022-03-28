@@ -3,7 +3,7 @@ import { AppContext } from "../App"
 
 export default function NewTextButton () {
 
-    const {meme, setMeme} = useContext(AppContext)
+    const {texts, setTexts} = useContext(AppContext)
 
     return (
         <button
@@ -11,11 +11,8 @@ export default function NewTextButton () {
             onClick={(e)=> {
                 e.stopPropagation()
 
-                setMeme(prev => prev = {
-                    ...prev,
-                    memeText: [...meme.memeText, ""]
-                })
-                }}
+                setTexts([...texts, ""])
+            }}
         >
             New Text
         </button>

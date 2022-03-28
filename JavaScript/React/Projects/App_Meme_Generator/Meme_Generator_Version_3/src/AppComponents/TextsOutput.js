@@ -4,10 +4,10 @@ import Draggable from "react-draggable"
 
 export default function TextsOutput() {
 
-   const {meme, fontSize} = useContext(AppContext)
+   const {texts, fontSize} = useContext(AppContext)
 
    let textElementsArray = []
-   for (let i = 1; i <= meme.memeText.length; i++) {
+   for (let i = 1; i <= texts.length; i++) {
       textElementsArray[i - 1] = (
          <Draggable key={`Key${i}`}>
             <div
@@ -15,7 +15,7 @@ export default function TextsOutput() {
                id={`${i}`}
                style={{ fontSize: `${fontSize}px` }}
             >
-               {meme.memeText[i - 1]}
+               {texts[i - 1]}
             </div>
          </Draggable>
       )
