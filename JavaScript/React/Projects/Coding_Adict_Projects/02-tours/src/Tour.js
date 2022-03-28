@@ -4,43 +4,43 @@ export default function Tour({id, name, info, image, price, setTours}) {        
     
     const [readMore, setReadMore] = useState(false)                                 // state responsible to define if the tour info should be displayed or not
 
-    function deleteTour() {                                                         // Function responsible to trigger a component delete
-        setTours(prev => {  
-            const newTours = []                                                         // empty new array
-            for(let i = 0; i < prev.length; i++)                                        // interates in the previous array, wich contains the Tour elements already constructed
-                if (prev[i].id !== id)                                                      // if this id is diferent from the id inside the array
-                    newTours.push(prev[i])                                                      // push back every component with different id than the actual one
+    const TourImage = () => (                                                       // Returns the JSX img structure
+        <img src={image} alt={name} />
+    )
 
-            return newTours                                                             // set the tours to the new array
-        })
-    }
+    const TourInfo = () => (                                                        // Returns the Tour info JSX structure
+        <div className="tour-info">
+            <h4>{name}</h4>
+            <h4 className="tour-price">{price}</h4>
+        </div>
+    )
 
-    const DeleteButton = ()=> {                                                     // Returns a delete button element
-        return (
-            <button className="delete-btn" onClick={deleteTour} >
-                Not interested, delete this bad trip!!                                                                           
-            </button>
-        )
-    }
+    const TourText = () => (                                                        // Returns the tour string text, based on readMore state
+        readMore 
+            ? info 
+            : `${info.substring(0, 100)} ...`
+    )        
 
-    const ReadMoreButton = () => {                                                  // Returns the read more button element
-        return (
-            <button onClick={() => {setReadMore(!readMore)}}>
-                { readMore ? `Show Less` : `Show more` }
-            </button>
-        )
-    }
+    const ReadMoreButton = () => (                                                  // Returns a JSX button responsible to toggle readMore state
+        <button onClick={() => {setReadMore(!readMore)}}>
+            { readMore ? `Show Less` : `Show more` }
+        </button>
+    )
 
-    const TourText = () => readMore ? info : `${info.substring(0, 100)} ...`        // if readMore is true, show all tour text, if not, it will be hidden partially
+    const DeleteButton = () => (                                                    // Returns a JSX button responsible to delete the tour inside the tour state, wich corresponds to the tour where it belongs
+        <button 
+            className="delete-btn" 
+            onClick={() => {setTours(prev => prev.filter(tour => tour.id !== id))}} 
+        >
+            Not interested, delete this bad trip!!                                                                           
+        </button>
+    )
 
-    return (                                                                        // Returns the Tour Component JSX Structure Logic
+    return (                                                                        // Returns the Tour JSX Structure Logics
         <article className="single-tour">
-            <img src={image} alt={name} />
+            <TourImage />
             <footer >
-                <div className="tour-info">
-                    <h4>{name}</h4>
-                    <h4 className="tour-price">{price}</h4>
-                </div>
+                <TourInfo />
                 <div>
                     <p>
                         <TourText />

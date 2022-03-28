@@ -3,18 +3,22 @@ import Tour from "./Tour"                                                       
 
 export default function Tours({tours, setTours}) {                                  // Component responsible to organize the Tour structure
 
-    const TourComponents = () => {
-        return tours.map(tour => {                                                      // Maps through tours array and returns a Tour Component for each element inside it
-            return <Tour key={tour.id} {...tour} setTours={setTours} />
-        })
-    }
+    const Title = () => (                                                               // Returns the title JSX structure
+        <div className="title">
+            <h2>our tours</h2>
+            <div className="underline"></div>
+        </div>
+    )
 
-    return (                                                                            // Returns the Tours Component JSX Structure Logics
+    const TourComponents = () => (                                                      // Returns a Tour component for each tour avaible inside the tour state
+        tours.map(tour => (                                                                 // Maps through tour state to give each tour its own Tour Component
+            <Tour key={tour.id} {...tour} setTours={setTours} />
+        ))
+    )
+
+    return (                                                                            // Returns the Tours JSX Structure Logics
         <section>
-            <div className="title">
-                <h2>our tours</h2>
-                <div className="underline"></div>
-            </div>
+            <Title />
             <div>
                 <TourComponents />
             </div>
