@@ -24,10 +24,13 @@ export default function App() {
       fontSize,      setFontSize
    }
 
-   useEffect(async () => {
-      await fetch("https://api.imgflip.com/get_memes")
-         .then(res => res.json())
-         .then(data => setAllMemes(data.data.memes))
+   useEffect(() => {
+      async function fetchDatabase() {
+         await fetch("https://api.imgflip.com/get_memes")
+            .then(res => res.json())
+            .then(data => setAllMemes(data.data.memes))
+      }
+      fetchDatabase()
    },[])
 
    return (
