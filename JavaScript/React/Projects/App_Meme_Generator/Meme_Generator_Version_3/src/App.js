@@ -1,12 +1,8 @@
 import React from "react"
 
 import Header from './components/Header'
-
 import HandleTextElements from "./components/handlers/handleTextElements"
 import HandleInputElements from "./components/handlers/handleInputElements"
-
-import addInputElements from "./components/scripts/addInputElements"
-import getNewImage from "./components/scripts/getNewImage"
 
 export default function App() {
 
@@ -47,13 +43,31 @@ export default function App() {
                   <HandleInputElements meme={meme} setMeme={setMeme}/>
                   <button
                      className="form--button"
-                     onClick={(e)=> addInputElements(e, meme, setMeme)}
+                     onClick={(e)=> {
+                        e.stopPropagation()
+
+                        setMeme(prev => prev = {
+                           ...prev,
+                           memeText: [...meme.memeText, ""]
+                        })
+                     }}
                   >
                      New Text
                   </button>
                   <button
                      className="form--button"
-                     onClick={(e)=> getNewImage(e, allMemes, setMeme)}
+                     onClick={(e)=> {   
+                        
+                        e.stopPropagation()
+
+                        const randomNumber = Math.floor(Math.random() * allMemes.length)
+                        const url = allMemes[randomNumber].url
+                     
+                        setMeme(prev => ({
+                           ...prev,
+                           randomImage: url
+                        }))}
+                     }
                   >
                      Get a new meme image 🖼️
                   </button>
