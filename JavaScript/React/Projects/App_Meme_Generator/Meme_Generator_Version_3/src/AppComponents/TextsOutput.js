@@ -6,20 +6,15 @@ export default function TextsOutput() {
 
    const {texts, fontSize} = useContext(AppContext)
 
-   let textElementsArray = []
-   for (let i = 0; i < texts.length; i++) {
-      textElementsArray[i] = (
-         <Draggable key={`Key${i}`}>
-            <div
-               className="meme--text top"
-               id={i}
-               style={{ fontSize: `${fontSize}px` }}
-            >
-               {texts[i]}
-            </div>
-         </Draggable>
-      )
-   }
-
-   return textElementsArray
+   return texts.map((text, index) => (
+      <Draggable key={`Key${index}`}>
+         <div
+            className="meme--text top"
+            id={index}
+            style={{ fontSize: `${fontSize}px` }}
+         >
+            {text}
+         </div>
+      </Draggable>
+   ))
 }
