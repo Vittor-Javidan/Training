@@ -20,12 +20,7 @@ export default function TextsInput(){
       const id = Number(e.target.id)
       let textArray = []
       if(id + 1 === texts.length){
-         for(let i = 0; i < texts.length; i++){
-            if(i !== id){
-               textArray.push(texts[i])
-               
-            }
-         }
+         textArray = texts.filter((text, index) => index !== id)
       } else {
          textArray = texts
          textArray[id] = ""
