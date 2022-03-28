@@ -4,7 +4,6 @@ import Header from './components/Header'
 
 import handleTextElements from "./components/handlers/handleTextElements"
 import handleInputElements from "./components/handlers/handleInputElements"
-import handleFontChange from "./components/handlers/handleFontChange"
 
 import addInputElements from "./components/scripts/addInputElements"
 import getNewImage from "./components/scripts/getNewImage"
@@ -41,7 +40,16 @@ export default function App() {
                <input
                   type="text"
                   placeholder={`Next New Text Font: ${meme.textFont}`}
-                  onChange={(e)=> handleFontChange(e, setMeme)}
+                  onChange={(e)=> {
+                     e.stopPropagation()
+
+                     const { value } = e.target
+                  
+                     setMeme(prev => ({
+                        ...prev,
+                        textFont: [`${value}px`]
+                     }))
+                  }}
                />
 
                <div className="form">
