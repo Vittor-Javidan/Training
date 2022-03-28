@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 
 import Header from './components/Header'
 import HandleTextElements from "./components/handleTextElements"
@@ -6,11 +6,7 @@ import HandleInputElements from "./components/handleInputElements"
 
 export default function App() {
 
-   const [allMemes, setAllMemes] = React.useState(async () => {
-      await fetch("https://api.imgflip.com/get_memes")
-         .then(res => res.json())
-         .then(data => setAllMemes(data.data.memes))
-   })
+   const [allMemes, setAllMemes] = React.useState([])
    const [meme, setMeme] = React.useState(() => {
       return {
          randomImage: "http://i.imgflip.com/1bij.jpg",
@@ -18,6 +14,14 @@ export default function App() {
          memeText: []
       }
    })
+
+   useEffect(async () => {
+
+      await fetch("https://api.imgflip.com/get_memes")
+         .then(res => res.json())
+         .then(data => setAllMemes(data.data.memes))
+         
+   },[])
    
    return (
       <div>
