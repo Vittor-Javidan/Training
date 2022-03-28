@@ -10,17 +10,17 @@ export default function App() {
    const [meme, setMeme] = React.useState(() => {
       return {
          randomImage: "http://i.imgflip.com/1bij.jpg",
-         textFont: `${40}px`,
          memeText: []
       }
    })
+   const [fontSize, setFontSize] = React.useState(40)
 
    useEffect(async () => {
 
       await fetch("https://api.imgflip.com/get_memes")
          .then(res => res.json())
          .then(data => setAllMemes(data.data.memes))
-         
+
    },[])
    
    return (
@@ -30,16 +30,12 @@ export default function App() {
             <div>
                <input
                   type="text"
-                  placeholder={`Next New Text Font: ${meme.textFont}`}
+                  placeholder={`Next New Text Font: ${fontSize}`}
                   onChange={(e)=> {
                      e.stopPropagation()
 
                      const { value } = e.target
-                  
-                     setMeme(prev => ({
-                        ...prev,
-                        textFont: [`${value}px`]
-                     }))
+                     setFontSize(value)
                   }}
                />
 
@@ -81,7 +77,7 @@ export default function App() {
                className="meme"
             >
                <img src={meme.randomImage} className="meme--image" alt="" />
-               <HandleTextElements meme={meme}/>
+               <HandleTextElements meme={meme} fontSize={fontSize}/>
             </div>
          </main>
       </div>
