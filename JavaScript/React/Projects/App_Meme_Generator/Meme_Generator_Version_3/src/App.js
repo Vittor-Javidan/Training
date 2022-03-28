@@ -10,7 +10,11 @@ import getNewImage from "./components/scripts/getNewImage"
 
 export default function App() {
 
-   const [allMemes, setAllMemes] = React.useState([])
+   const [allMemes, setAllMemes] = React.useState(async () => {
+      await fetch("https://api.imgflip.com/get_memes")
+         .then(res => res.json())
+         .then(data => setAllMemes(data.data.memes))
+   })
    const [meme, setMeme] = React.useState(() => {
       return {
          randomImage: "http://i.imgflip.com/1bij.jpg",
@@ -18,12 +22,6 @@ export default function App() {
          memeText: []
       }
    })
-
-   React.useEffect(() => {
-      fetch("https://api.imgflip.com/get_memes")
-         .then(res => res.json())
-         .then(data => setAllMemes(data.data.memes))
-   }, [])
    
    return (
       <div>
