@@ -7,15 +7,15 @@ export default function TextsOutput() {
    const {texts, fontSize} = useContext(AppContext)
 
    let textElementsArray = []
-   for (let i = 1; i <= texts.length; i++) {
-      textElementsArray[i - 1] = (
+   for (let i = 0; i < texts.length; i++) {
+      textElementsArray[i] = (
          <Draggable key={`Key${i}`}>
             <div
                className="meme--text top"
-               id={`${i}`}
+               id={i}
                style={{ fontSize: `${fontSize}px` }}
             >
-               {texts[i - 1]}
+               {texts[i]}
             </div>
          </Draggable>
       )

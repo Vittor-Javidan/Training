@@ -33,6 +33,8 @@ export default function App() {
       fetchDatabase()
    },[])
 
+   console.log(texts)
+
    return (
       <AppContext.Provider value={props}>
          <Header />
