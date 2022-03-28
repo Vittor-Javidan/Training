@@ -1,4 +1,4 @@
-export default function handleInputElements(meme, setMeme, setInputElement){
+export default function HandleInputElements({meme, setMeme}){
    let inputElementsArray = []
    for (let i = 1; i <= meme.memeText.length; i++) {
       inputElementsArray[i - 1] = (
@@ -54,5 +54,5 @@ export default function handleInputElements(meme, setMeme, setInputElement){
          </div>
       )
    }
-   setInputElement(inputElementsArray)
+   return inputElementsArray
 }
