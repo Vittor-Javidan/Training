@@ -3,9 +3,9 @@ import { AppContext } from "../App"
 
 export default function MemeImage() {
 
-    const {meme} = useContext(AppContext)
+    const {memeImage} = useContext(AppContext)
     
     return (
-        <img src={meme.randomImage} className="meme--image" alt="" />
+        <img src={memeImage} className="meme--image" alt="" />
     )
 }
