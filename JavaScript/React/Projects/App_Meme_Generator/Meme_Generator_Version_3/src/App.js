@@ -1,8 +1,8 @@
 import React from "react"
 
 import Header from './components/Header'
-import HandleTextElements from "./components/handlers/handleTextElements"
-import HandleInputElements from "./components/handlers/handleInputElements"
+import HandleTextElements from "./components/handleTextElements"
+import HandleInputElements from "./components/handleInputElements"
 
 export default function App() {
 
