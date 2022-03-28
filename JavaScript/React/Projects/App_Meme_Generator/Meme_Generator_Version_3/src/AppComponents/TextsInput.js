@@ -1,4 +1,10 @@
-export default function HandleInputElements({meme, setMeme}){
+import { useContext } from "react"
+import { AppContext } from "../App"
+
+export default function TextsInput(){
+
+   const {meme, setMeme} = useContext(AppContext)
+
    let inputElementsArray = []
    for (let i = 1; i <= meme.memeText.length; i++) {
       inputElementsArray[i - 1] = (

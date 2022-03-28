@@ -1,6 +1,10 @@
+import { useContext } from "react"
+import { AppContext } from "../App"
 import Draggable from "react-draggable"
 
-export default function HandleTextElements({meme, fontSize}) {
+export default function OutputTexts() {
+
+   const {meme, fontSize} = useContext(AppContext)
 
    let textElementsArray = []
    for (let i = 1; i <= meme.memeText.length; i++) {
