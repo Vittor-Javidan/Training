@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { AppContext } from "../App"
 import Draggable from "react-draggable"
 
-export default function OutputTexts() {
+export default function TextsOutput() {
 
    const {meme, fontSize} = useContext(AppContext)
 

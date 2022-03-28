@@ -6,25 +6,25 @@ import TextsInput from "./AppComponents/TextsInput"
 import NewTextButton from "./AppComponents/NewTextButton"
 import GetANewMemeImageButton from "./AppComponents/GetANewMemeImageButton"
 import MemeImage from "./AppComponents/MemeImage"
-import OutputTexts from "./AppComponents/OutputTexts"
+import TextsOutput from "./AppComponents/TextsOutput"
 
 export const AppContext = createContext()
 
 export default function App() {
 
    const [allMemes, setAllMemes] = useState([])
-   const [meme, setMeme] = useState(() => {
-      return {
+   const [meme, setMeme] = useState(() => (
+      {
          randomImage: "http://i.imgflip.com/1bij.jpg",
          memeText: []
       }
-   })
+   ))
    const [fontSize, setFontSize] = useState(40)
 
    const props = {
-      allMemes, setAllMemes,
-      meme, setMeme,
-      fontSize, setFontSize
+      allMemes,   setAllMemes,
+      meme,       setMeme,
+      fontSize,   setFontSize
    }
 
    useEffect(async () => {
@@ -47,7 +47,7 @@ export default function App() {
             </div>
             <div className="meme">
                <MemeImage />
-               <OutputTexts />
+               <TextsOutput />
             </div>
          </main>
       </AppContext.Provider >

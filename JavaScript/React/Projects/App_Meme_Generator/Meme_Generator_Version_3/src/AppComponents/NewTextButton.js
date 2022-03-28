@@ -9,13 +9,13 @@ export default function NewTextButton () {
         <button
             className="form--button"
             onClick={(e)=> {
-            e.stopPropagation()
+                e.stopPropagation()
 
-            setMeme(prev => prev = {
-                ...prev,
-                memeText: [...meme.memeText, ""]
-            })
-            }}
+                setMeme(prev => prev = {
+                    ...prev,
+                    memeText: [...meme.memeText, ""]
+                })
+                }}
         >
             New Text
         </button>
