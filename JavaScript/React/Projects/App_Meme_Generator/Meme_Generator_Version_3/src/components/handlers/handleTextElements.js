@@ -1,6 +1,7 @@
 import Draggable from "react-draggable"
 
-export default function handleTextElements(meme, setTextElements) {
+export default function HandleTextElements({meme}) {
+
    let textElementsArray = []
    for (let i = 1; i <= meme.memeText.length; i++) {
       textElementsArray[i - 1] = (
@@ -15,5 +16,6 @@ export default function handleTextElements(meme, setTextElements) {
          </Draggable>
       )
    }
-   setTextElements(textElementsArray)
+
+   return textElementsArray
 }

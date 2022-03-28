@@ -2,7 +2,7 @@ import React from "react"
 
 import Header from './components/Header'
 
-import handleTextElements from "./components/handlers/handleTextElements"
+import HandleTextElements from "./components/handlers/handleTextElements"
 import handleInputElements from "./components/handlers/handleInputElements"
 
 import addInputElements from "./components/scripts/addInputElements"
@@ -19,7 +19,6 @@ export default function App() {
       }
    })
    const [inputElements, setInputElement] = React.useState([])
-   const [textElements, setTextElements] = React.useState([])
 
    React.useEffect(() => {
       fetch("https://api.imgflip.com/get_memes")
@@ -28,7 +27,6 @@ export default function App() {
    }, [])
 
    React.useEffect(() => {     
-      handleTextElements(meme, setTextElements)
       handleInputElements(meme, setMeme, setInputElement)
    }, [meme])
    
@@ -72,7 +70,7 @@ export default function App() {
                className="meme"
             >
                <img src={meme.randomImage} className="meme--image" alt="" />
-               {textElements}
+               <HandleTextElements meme={meme}/>
             </div>
          </main>
       </div>
