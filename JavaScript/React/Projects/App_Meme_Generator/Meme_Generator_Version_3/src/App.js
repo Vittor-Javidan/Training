@@ -37,13 +37,11 @@ export default function App() {
       <AppContext.Provider value={props}>
          <Header />
          <main>
-            <div>
-               <div className="form">
-                  <FontInput />
-                  <TextsInputs />
-                  <NewTextButton />
-                  <GetANewMemeImageButton />
-               </div>
+            <div className="form">
+               <FontInput />
+               <TextsInputs />
+               <NewTextButton />
+               <GetANewMemeImageButton />
             </div>
             <div className="meme">
                <MemeImage />

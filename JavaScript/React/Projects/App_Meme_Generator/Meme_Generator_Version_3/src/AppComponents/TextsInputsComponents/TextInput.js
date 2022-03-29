@@ -1,9 +1,11 @@
 import { useContext } from "react"
 import { AppContext } from "../../App"
+import { TextsInputsContext } from "../TextsInputs"
 
-export default function TextInput({ text, index }) {
+export default function TextInput() {
 
    const { texts, setTexts } = useContext(AppContext)
+   const { text, index } = useContext(TextsInputsContext)
 
    function TextChange(e) {
 
