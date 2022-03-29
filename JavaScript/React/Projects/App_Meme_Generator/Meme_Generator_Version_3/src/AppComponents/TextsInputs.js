@@ -1,70 +1,20 @@
 import { useContext } from "react"
 import { AppContext } from "../App"
 
-function TextInput ({text, index}){
-
-   const {texts, setTexts} = useContext(AppContext)
-
-   function TextChange(e) {
-
-      const { id, value } = e.target
-      let textArray = texts
-      textArray[id] = value
-   
-      setTexts([...textArray])
-   }
-
-   return (
-      <input
-         className="form--input--text"
-         type="text"
-         id={index}
-         placeholder={`Text ${index + 1}`}
-         value={text}
-         onChange={TextChange}
-      />
-   )
-}
+import TextInput from "./TextsInputsComponents/TextInput"
+import DeleteButton from "./TextsInputsComponents/DeleteButton"
 
 export default function TextsInputs(){
 
-   const {texts, setTexts} = useContext(AppContext)
-
-   function TextChange(e) {
-
-      const { id, value } = e.target
-      let textArray = texts
-      textArray[id] = value
-   
-      setTexts([...textArray])
-   }
-
-   function deleteInput(e) {
-      e.stopPropagation()
-   
-      const id = Number(e.target.id)
-      let textArray = []
-      if(id + 1 === texts.length){
-         textArray = texts.filter((text, index) => index !== id)
-      } else {
-         textArray = texts
-         textArray[id] = ""
-      }
-   
-      setTexts([...textArray])
-   }
+   const {texts} = useContext(AppContext)
 
    return texts.map((text, index) => (
+      
       <div className="form--input" key={`key${index}`}>
+
          <TextInput text={text} index={index} />
-         <button
-            id={index}
-            type="reset"
-            className="form--input--delete-btn"
-            onClick={deleteInput}
-         >
-            <i className="form--input--gg-trash form--input--trash-icon" id={index}></i>
-         </button>
+         <DeleteButton index={index} />
+
       </div>
    ))
 }
