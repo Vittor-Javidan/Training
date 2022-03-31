@@ -25,6 +25,9 @@
     If you have the hability to subscribe function as you need, you have too the possibility to activate
     and deactivate, just by commenting the subscribe call statement. If see the code, if you don't have an
     function subscribed, if you try to call it, no error will be throw
+
+    the post event can follow a style of calling a specific key, or calling the all functions subscribed in
+    a single call. In our case i coded for a specific key, because i found easy to learn it
 */
 
 // Dummy Functions
@@ -48,7 +51,7 @@ class Observer {
     }
 
     static postEvent (key, fnArgs) {
-        
+
         if(this.#subcribed[key]) {
 
             this.#subcribed[key](fnArgs)
