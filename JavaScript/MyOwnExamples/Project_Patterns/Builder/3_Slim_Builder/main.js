@@ -56,7 +56,9 @@ class CarBuilder {
 /*
     Other thing that don't makes sense for me yet.
     If the director already has the instructions of what to build setted for each method,
-    why instantiate a builder in the main block code? 
+    why instantiate a builder inside another class with another instance from Director class 
+    just to put the builder as an argument inside the Director instance? 
+    ( https://refactoring.guru/design-patterns/builder right before "Applicability")
     
     i see instantiation inside the methods with the setters instructions as a much more clean way to do it.
     hiding more logic from the client, giving a better interface. No?
