@@ -1,5 +1,5 @@
-import TransportsFactory from "./Transports/Transports.js"
-import CargoFactory from "./Cargo/Cargo.js"
+import TransportsFactory from "./Transports/TransportsFactory.js"
+import CargoFactory from "./Cargo/CargoFactory.js"
 
 const GLOBAL = {
     

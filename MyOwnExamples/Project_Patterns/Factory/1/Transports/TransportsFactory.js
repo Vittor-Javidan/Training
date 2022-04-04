@@ -1,4 +1,4 @@
-import CargoFactory from "../Cargo/Cargo.js";
+import CargoFactory from "../Cargo/CargoFactory.js";
 
 import Boat from "./TransportClasses/Boat.js";
 import Truck from "./TransportClasses/Truck.js";

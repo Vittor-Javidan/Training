@@ -1,6 +1,6 @@
-import SmallContainer from "./CargoClasses/SmallPackage.js";
-import MediumContainer from "./CargoClasses/MediumPackage.js";
-import LargeContainer from "./CargoClasses/LargePackage.js";
+import SmallContainer from "./CargoClasses/SmallContainer.js";
+import MediumContainer from "./CargoClasses/MediumContainer.js";
+import LargeContainer from "./CargoClasses/LargeContainer.js";
 
 export default class CargoFactory {
 

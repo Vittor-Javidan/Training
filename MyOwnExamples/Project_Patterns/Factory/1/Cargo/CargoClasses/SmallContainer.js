@@ -1,4 +1,4 @@
-import ContainerAbstractClass from "./AbstractClasses/PackageAbstractClass.js"
+import ContainerAbstractClass from "./AbstractClasses/ContainerAbstractClass.js"
 
 export default class SmallContainer extends ContainerAbstractClass {
 

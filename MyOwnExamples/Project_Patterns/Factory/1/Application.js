@@ -1,4 +1,4 @@
-import TransportsFactory from "./Transports/Transports.js"
+import TransportsFactory from "./Transports/TransportsFactory.js"
 
 export default class Application {
 

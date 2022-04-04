@@ -1,5 +1,5 @@
 import Application from "./Application.js"
-import GLOBAL from "./GlobalVariables.js"
+import GLOBAL from "./GlobalConstants.js"
 
 const app = Application.getInstance()
 
