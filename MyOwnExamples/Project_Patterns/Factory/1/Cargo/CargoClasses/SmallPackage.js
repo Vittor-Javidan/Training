@@ -1,7 +1,6 @@
-import PackageAbstractClass from "./AbstractClasses/PackageAbstractClass.js"
+import ContainerAbstractClass from "./AbstractClasses/PackageAbstractClass.js"
 
-export default class SmallPackage extends PackageAbstractClass {
-    packageProduct(){
-        console.log('Small package stored')
-    }
+export default class SmallContainer extends ContainerAbstractClass {
+
+    packageProduct(){ console.log('Small package stored') }
 }

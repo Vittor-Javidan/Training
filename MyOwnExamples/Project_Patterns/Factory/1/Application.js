@@ -1,4 +1,4 @@
-import Transports from "./Transports/Transports.js"
+import TransportsFactory from "./Transports/Transports.js"
 
 export default class Application {
 
@@ -19,8 +19,9 @@ export default class Application {
 
     /** 
      * @param {Number} transportType
-     * @param {Number} containerType */
+     * @param {Number} containerType 
+     * */
     deliver(transportType, containerType){
-        Transports.loadPackage(transportType, containerType)
+        TransportsFactory.assingTransport(transportType, containerType)
     }
 }

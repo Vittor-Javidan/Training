@@ -1,19 +1,19 @@
-import Transports from "./Transports/Transports.js"
-import Cargo from "./Cargo/Cargo.js"
+import TransportsFactory from "./Transports/Transports.js"
+import CargoFactory from "./Cargo/Cargo.js"
 
 const GLOBAL = {
     
     //Transport Types
     TRANSPORT_TYPES: {
-        BOAT: Transports.TRANSPORTS.BOAT,
-        TRUCK: Transports.TRANSPORTS.TRUCK,
+        BOAT: TransportsFactory.TRANSPORTS.BOAT,
+        TRUCK: TransportsFactory.TRANSPORTS.TRUCK,
     },
     
     //Container Types
     CONTAINER_TYPES: {
-        SMALL: Cargo.CONTAINER.SMALL,
-        MEDIUM: Cargo.CONTAINER.MEDIUM,
-        LARGE: Cargo.CONTAINER.LARGE,
+        SMALL: CargoFactory.CONTAINER.SMALL,
+        MEDIUM: CargoFactory.CONTAINER.MEDIUM,
+        LARGE: CargoFactory.CONTAINER.LARGE,
     },
 }
 
